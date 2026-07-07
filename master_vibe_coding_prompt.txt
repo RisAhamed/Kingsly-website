@@ -1,0 +1,341 @@
+
+=================================================================
+KINGSLYN DENTAL CARE — WEBSITE V1 MASTER BUILD PROMPT
+(Paste this entire prompt into Claude Code / GitHub Copilot / Cursor)
+=================================================================
+
+ROLE: You are a senior full-stack developer + creative technologist. Build a 
+premium, highly-animated, multi-page dental clinic website inspired by the 
+interaction quality of lusion.co, formless.xyz, gufram.it, and 
+labs.noomoagency.com — but tailored for a real dental clinic (Kingslyn Dental Care).
+
+TECH STACK (use exactly this):
+- Next.js 14+ (App Router, TypeScript)
+- TailwindCSS
+- GSAP + ScrollTrigger (scroll-driven reveals, pinning, parallax)
+- Framer Motion (page transitions, micro-interactions, hover states)
+- Lenis (global smooth scroll)
+- Spline OR React Three Fiber (optional 3D hero accent — abstract tooth/particle shape)
+- Supabase (doctor data + booking form storage)
+- next/image for all image optimization
+
+=================================================================
+BRAND ASSETS (already provided by user, located in /public/images/)
+=================================================================
+- logo.png                     -> Use as favicon AND top-left navbar logo on every page
+- clinicouterlook.png          -> About page, footer background
+- dentalchair.png              -> Services page, homepage feature section
+- operatory1.png, operatory2.png -> Facilities/gallery section
+- reception.png                -> About page / facilities section
+- sterilazationroom.png        -> "Hygiene & Safety" trust section (Dr. Kingston emphasizes sterilization)
+- waitingarea.png               -> Contact/facilities section
+- Dr. C. Kingston.png          -> Doctor profile: Dr. C. Kingston
+- Dr. Janlyn Kingston.png      -> Doctor profile: Dr. Janlyn Kingston
+- Dr Anand kasi.png            -> Doctor profile: Dr. Anand Kasi
+- Dr Praveen.png               -> Doctor profile: Dr. Praveen
+- Dr Aravind.png               -> Doctor profile: Dr. Aravind V
+- Dr. Sethuraman.png           -> Doctor profile: Dr. Sethuraman
+- Dr. R. Snega Latha.png       -> Doctor profile: Dr. R. Snega Latha
+
+FAVICON INSTRUCTION: Convert logo.png to favicon.ico and multiple sizes 
+(16x16, 32x32, 180x180 apple-touch-icon). Place logo.png in navbar top-left 
+on every page, linking to homepage, height ~40-48px, with a subtle 
+scale-up hover animation (Framer Motion whileHover={{ scale: 1.05 }}).
+
+=================================================================
+CLINIC CONTACT INFO (use in Footer + Contact page + Navbar CTA)
+=================================================================
+Phone: +91 99766 58340
+Facebook: https://www.facebook.com/share/1HJcck1h3L/
+Instagram: https://www.instagram.com/kingstonchellapandian
+Clinic Name: Kingslyn Dental Care
+
+=================================================================
+DOCTOR DATA (build a Supabase table `doctors` and seed with this data,
+OR hardcode as a doctors.ts array for V1 if Supabase setup isn't ready yet)
+=================================================================
+
+1. Dr. C. Kingston
+   slug: dr-c-kingston
+   image: /images/Dr. C. Kingston.png
+   title: Kingslyn Dental Care | Expert Cosmetic Dentistry
+   languages: Hindi, English
+   specialties: Restorative Dental Treatments, Root Canal Therapy (Endodontics), Aesthetic Dental Treatments
+   experience: 17 years General Dentistry + 9 years Endodontics
+   education: 
+     - Balaji Dental College and Hospital, Chennai — BDS (2007)
+     - Rajas Dental College and Hospital, Tirunelveli — MDS (2015)
+     - SRM University, Chennai — PhD (in progress)
+   bio: [Use the full "About" text provided by user verbatim — emphasize 
+        sterilization standards, affordability, restorative/esthetic/endodontic expertise]
+
+2. Dr. Janlyn Kingston
+   slug: dr-janlyn-kingston
+   image: /images/Dr. Janlyn Kingston.png
+   title: Chief Dental Surgeon, BDS
+   specialties: Teeth Scaling and Polishing, Tooth Removal (Extraction), 
+     Preventive Dental Care Services, Aesthetic Dental Treatments, 
+     Dental Prosthetics and Restorations
+   bio: [Use full "About" text — emphasize patient-centered care, advanced techniques]
+
+3. Dr. Anand Kasi
+   slug: dr-anand-kasi
+   image: /images/Dr Anand kasi.png
+   title: Pedodontist (Pediatric Dentist)
+   specialties: Pediatric Dentistry Services
+   bio: [Use full "About" text — emphasize gentle approach with children, community outreach]
+
+4. Dr. Praveen
+   slug: dr-praveen
+   image: /images/Dr Praveen.png
+   title: Orthodontist
+   specialties: Braces and Orthodontic Services
+   bio: [Use full "About" text — emphasize clear aligners, 3D treatment planning]
+
+5. Dr. Aravind V
+   slug: dr-aravind-v
+   image: /images/Dr Aravind.png
+   title: Periodontist
+   specialties: Gum Disease Treatment (Periodontics)
+   bio: [Use full "About" text — emphasize gum grafting, implant placement]
+
+6. Dr. Sethuraman
+   slug: dr-sethuraman
+   image: /images/Dr. Sethuraman.png
+   title: Prosthodontist & Implantologist
+   specialties: Dental Implant Solutions, Advanced Prosthodontic Solutions
+   bio: [Use full "About" text — emphasize 3D printing, custom prosthesis craftsmanship]
+
+7. Dr. R. Snega Latha
+   slug: dr-r-snega-latha
+   image: /images/Dr. R. Snega Latha.png
+   title: General Dentist, BDS
+   specialties: Tooth Removal (Extraction), Preventive Dental Care Services, 
+     Teeth Scaling and Polishing
+   bio: [Use full "About" text — emphasize compassionate patient-centered general care]
+
+=================================================================
+PAGE-BY-PAGE BUILD SPEC
+=================================================================
+
+--- 1. HOMEPAGE (app/page.tsx) ---
+SECTIONS (top to bottom):
+a) Navbar (fixed, transparent-to-solid on scroll via GSAP ScrollTrigger):
+   logo.png top-left, links: Home / Doctors / Services / About / Contact, 
+   "Book Appointment" CTA button (right), phone number icon-link.
+
+b) Hero Section (100vh):
+   - Full-bleed AI-generated background video (see VIDEO PROMPTS section below, video: hero-bg.mp4)
+   - Overlay: dark gradient for text legibility
+   - Animated headline "Your Smile, Our Priority" — Framer Motion stagger text reveal 
+     (each word fades+slides up with 0.05s delay between words)
+   - Subheadline: "Kingslyn Dental Care — Trusted Dental Excellence in Tamil Nadu"
+   - CTA buttons: "Book Appointment" (primary) + "Meet Our Doctors" (secondary), 
+     both with magnetic hover effect (GSAP mousemove-based translate)
+   - Scroll-down indicator (bouncing chevron, GSAP infinite yoyo animation)
+
+c) Trust Bar (horizontal scroll-in stats, GSAP ScrollTrigger stagger):
+   "7 Expert Doctors" | "17+ Years Experience" | "Sterilized Instruments" | 
+   "Affordable Care" — each stat counts up from 0 using GSAP on scroll into view.
+
+d) Doctors Preview Section:
+   - Section heading "Meet Our Specialists" (fade+slide in on scroll)
+   - Horizontal scrollable card row (or grid on mobile) of all 7 doctors
+   - Each card: doctor image (next/image, object-cover), name, specialty tag
+   - Card hover: GSAP 3D tilt effect (rotateX/rotateY based on mouse position) 
+     + image slight zoom (scale 1.08) + shadow lift
+   - Click card -> Framer Motion shared layout transition -> navigates to 
+     /doctors/[slug] (use Next.js <Link>)
+   - "View All Doctors" link at end of row
+
+e) Services Preview Section:
+   - Background video: services-bg.mp4 (subtle, low-opacity, behind cards)
+   - Grid of service categories: Cosmetic Dentistry, Root Canal (Endodontics), 
+     Braces/Orthodontics, Pediatric Dentistry, Gum Treatment (Periodontics), 
+     Dental Implants, Teeth Cleaning/Scaling, Tooth Extraction
+   - Each card: icon + title + one-line description
+   - GSAP ScrollTrigger: cards stagger-animate in (y:60->0, opacity:0->1, 0.1s stagger)
+   - Hover: card lifts (translateY -8px) + border glow (accent color)
+
+f) Facilities/Gallery Section ("Step Inside Our Clinic"):
+   - Use images: clinicouterlook.png, operatory1.png, operatory2.png, 
+     reception.png, sterilazationroom.png, waitingarea.png, dentalchair.png
+   - Masonry or horizontal-scroll gallery layout
+   - GSAP ScrollTrigger horizontal scroll-jacking OR simple pinned horizontal 
+     scroll section (pin the section, translateX images as user scrolls vertically)
+   - Caption overlay on hover for each image (e.g., "Sterilization Room — 
+     Safety First" for sterilazationroom.png)
+
+g) Testimonials Section:
+   - Auto-scrolling infinite carousel (Framer Motion animate x with repeat: Infinity)
+   - Placeholder testimonial cards (3-5), star ratings, patient name
+
+h) Final CTA Section:
+   - Full-width background video (cta-bg.mp4)
+   - Large headline "Ready for a Healthier Smile?"
+   - "Book Your Appointment" button, phone number displayed large
+
+i) Footer:
+   - logo.png + clinic name
+   - Quick links (Doctors, Services, About, Contact)
+   - Social icons linking to Facebook and Instagram (provided URLs)
+   - Phone number, address placeholder
+   - Copyright line
+
+--- 2. DOCTORS LISTING PAGE (app/doctors/page.tsx) ---
+- Page header with title "Our Expert Team" + subtle background video (doctors-listing-bg.mp4, very low opacity, behind text only)
+- Grid of all 7 doctor cards (responsive: 1 col mobile, 2 col tablet, 3 col desktop)
+- Each card identical style to homepage preview but slightly larger
+- Filter/tag pills at top: "All", "Cosmetic", "Orthodontics", "Pediatric", 
+  "Implants", "Periodontics", "General" — clicking filters the grid 
+  (Framer Motion AnimatePresence for smooth add/remove of filtered cards)
+- Click any card -> navigate to /doctors/[slug]
+
+--- 3. DOCTOR PROFILE PAGE (app/doctors/[slug]/page.tsx) — DYNAMIC ROUTE ---
+- Fetch doctor by slug (from doctors.ts array or Supabase)
+- If not found: call notFound()
+- Layout:
+  a) Hero: doctor image (large, right side) + name, title, specialties tags (left side)
+     Background: subtle gradient, NOT a video (keep focus on doctor)
+     Framer Motion page entrance: image slides in from right, text from left
+  b) Languages Spoken section (pill badges)
+  c) Top Specialties (animated pill list, GSAP stagger on scroll)
+  d) About section (full bio text from data, readable typography, max-width for readability)
+  e) Education timeline (if available) — vertical timeline with GSAP 
+     ScrollTrigger draw-in line animation connecting each degree
+  f) "Book Appointment with [Doctor Name]" CTA button at bottom
+  g) Back button / breadcrumb (Home > Doctors > [Doctor Name])
+
+--- 4. SERVICES PAGE (app/services/page.tsx) ---
+- Background video: services-hero-bg.mp4 (hero section only)
+- List all services derived from doctor specialties, grouped:
+  Cosmetic Dentistry | Root Canal Therapy | Orthodontics (Braces) | 
+  Pediatric Dentistry | Periodontics (Gum Treatment) | Dental Implants | 
+  Prosthodontics | Preventive Care (Scaling/Cleaning) | Extractions
+- Each service: expandable accordion (Framer Motion height animation) 
+  with description + "which doctor handles this" link back to doctor profile
+- GSAP ScrollTrigger reveal for each accordion row on scroll
+
+--- 5. ABOUT PAGE (app/about/page.tsx) ---
+- Background image: clinicouterlook.png (parallax effect via GSAP, 
+  moves slower than scroll speed)
+- Clinic story/mission section
+- Facilities showcase using reception.png, sterilazationroom.png, 
+  waitingarea.png, operatory1.png, operatory2.png — grid with hover zoom
+- "Why Choose Us" section: Sterilization Standards, Affordable Care, 
+  Experienced Team, Modern Technology — 4 animated icon cards
+
+--- 6. BOOKING PAGE (app/booking/page.tsx) ---
+- Multi-step form (Framer Motion AnimatePresence between steps):
+  Step 1: Select Doctor (dropdown/cards, pre-fill if coming from doctor profile page)
+  Step 2: Select Date & Time
+  Step 3: Patient details (name, phone, reason for visit)
+  Step 4: Confirmation
+- Progress bar animates with GSAP as user moves through steps
+- Submit -> store in Supabase `appointments` table
+- Success animation: checkmark draw-in (SVG path animation via GSAP)
+
+--- 7. CONTACT PAGE (app/contact/page.tsx) ---
+- Background: waitingarea.png with dark overlay
+- Contact form (name, email, message) + phone number + social links 
+  (Facebook, Instagram icons, animated hover bounce)
+- Google Maps embed (placeholder location)
+- Click-to-call button for mobile: tel:+919976658340
+
+=================================================================
+GLOBAL ANIMATION RULES (apply everywhere)
+=================================================================
+1. Install: npm install gsap @gsap/react framer-motion lenis
+2. Root layout.tsx: initialize Lenis smooth scroll globally (see code pattern below)
+3. Every section entering viewport: GSAP ScrollTrigger fade+slide (opacity 0->1, y:60->0, duration:1, ease:"power3.out")
+4. Every page transition: Framer Motion AnimatePresence with mode="wait", 
+   0.5s fade+slight vertical shift
+5. Every clickable card/button: subtle hover scale (1.03-1.08) + shadow lift
+6. Every image: next/image with blur placeholder, lazy loaded except hero images (priority=true)
+7. Respect prefers-reduced-motion: wrap all GSAP/Framer animations with a check 
+   and disable heavy motion for users who request it
+8. Mobile: disable heavy 3D tilt/parallax effects, keep simple fade-ins only 
+   (performance + smaller screens don't benefit from tilt effects)
+
+LENIS SETUP CODE (put in app/layout.tsx or a ClientLayout wrapper):
+```
+'use client'
+import { useEffect } from 'react'
+import Lenis from 'lenis'
+
+export function SmoothScrollProvider({ children }) {
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.2, smoothWheel: true })
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+    return () => lenis.destroy()
+  }, [])
+  return <>{children}</>
+}
+```
+
+=================================================================
+AI BACKGROUND VIDEO PROMPTS (Google Veo 3 — each generates 8s, loop-ready)
+=================================================================
+Generate each in Google AI Studio (aistudio.google.com/models/veo-3), 
+download as MP4, convert to WebM with ffmpeg, place in /public/videos/
+
+PLACEMENT MAP:
+| Video filename          | Page/Section              |
+|--------------------------|----------------------------|
+| hero-bg.mp4              | Homepage hero (full screen)|
+| services-bg.mp4          | Homepage services preview (low opacity)|
+| cta-bg.mp4               | Homepage final CTA section |
+| doctors-listing-bg.mp4   | Doctors listing page header (very low opacity)|
+| services-hero-bg.mp4     | Services page hero         |
+
+NOTE ON 8-SECOND LIMIT: Since Veo generates only 8-10 second clips, always 
+add "seamless loop" and "no jump cuts" to every prompt, then in code use:
+<video autoPlay muted loop playsInline> — the loop attribute handles 
+continuous playback automatically once you have a clean seamless clip. 
+For extra safety, use a crossfade technique: duplicate the video element 
+and crossfade between two instances at the loop point using Framer Motion 
+opacity animation timed to the video duration, eliminating any visible seam.
+
+=================================================================
+FOLDER STRUCTURE TO SCAFFOLD
+=================================================================
+app/
+├── layout.tsx (Lenis + Navbar + Footer + Framer AnimatePresence wrapper)
+├── page.tsx (Homepage)
+├── doctors/
+│   ├── page.tsx
+│   └── [slug]/page.tsx
+├── services/page.tsx
+├── about/page.tsx
+├── booking/page.tsx
+├── contact/page.tsx
+components/
+├── Navbar.tsx
+├── Footer.tsx
+├── VideoBackground.tsx
+├── DoctorCard.tsx
+├── ServiceCard.tsx
+├── SmoothScrollProvider.tsx
+lib/
+├── doctors.ts (hardcoded array OR supabase client fetch)
+public/
+├── images/ (all provided images)
+├── videos/ (Veo-generated videos)
+├── favicon.ico (generated from logo.png)
+
+=================================================================
+EXECUTION INSTRUCTION FOR YOU (Claude Code / Copilot)
+=================================================================
+Build this as a working Next.js project, page by page, starting with 
+project scaffolding + layout + Navbar/Footer, then Homepage, then Doctors 
+listing + dynamic profile pages, then remaining pages. After each page, 
+pause and show me the result before continuing to the next. Use the 
+doctor bio text I provide verbatim — do not shorten or paraphrase it. 
+Use placeholder video tags where Veo videos aren't generated yet 
+(fallback to a static gradient background) so the site still renders 
+correctly before I add the actual video files.
+=================================================================
