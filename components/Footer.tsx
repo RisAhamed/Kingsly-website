@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import MagneticButton from '@/components/MagneticButton';
 
 const HOURS = [
   ['Monday', '10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM'],
@@ -16,7 +17,6 @@ const QUICK_LINKS = [
   { label: 'Services', href: '/services' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Booking', href: '/booking' },
 ] as const;
 
 export default function Footer() {
@@ -32,11 +32,13 @@ export default function Footer() {
             Specialist-led dental care with a focus on sterilization, comfort, restorative precision, and accessible treatment.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="tel:+919976658340" className="btn-gold transition-all duration-300">
-              Call Clinic
-            </a>
-            <Link href="/booking" className="btn-outline">
-              Book Visit
+            <MagneticButton>
+              <a href="tel:+919976658340" className="btn-gold transition-all duration-300">
+                Call Clinic
+              </a>
+            </MagneticButton>
+            <Link href="/contact" className="btn-outline">
+              Contact Us
             </Link>
           </div>
         </div>

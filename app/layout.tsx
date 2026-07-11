@@ -3,6 +3,7 @@ import './globals.css';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
 
 export const metadata: Metadata = {
   title: 'Kingslyn Dental Care | Premium Dental Clinic in Tamil Nadu',
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-brand-primary font-sans text-brand-light antialiased">
         <SmoothScrollProvider>
+          <CustomCursor />
           <Navbar />
           <main>{children}</main>
           <Footer />

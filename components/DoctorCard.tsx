@@ -1,8 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import type { Doctor } from '@/lib/doctors';
 
 interface DoctorCardProps {
@@ -11,43 +12,69 @@ interface DoctorCardProps {
 }
 
 export default function DoctorCard({ doctor, index }: DoctorCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    setRotate({ x: y * -6, y: x * 6 });
+  }
+
+  function handleMouseLeave() {
+    setRotate({ x: 0, y: 0 });
+  }
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
+      ref={cardRef}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ delay: Math.min(index * 0.05, 0.25), duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
-      className="group h-full"
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+      animate={{ rotateX: rotate.x, rotateY: rotate.y }}
+      className="group relative overflow-hidden rounded-[1.75rem] bg-white shadow-sm hover:shadow-2xl transition-shadow duration-500"
     >
-      <Link href={`/doctors/${doctor.slug}`} className="surface-card block h-full p-2 bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <div className="relative overflow-hidden rounded-[1.55rem] bg-brand-secondary">
-          <div className="relative aspect-[4/5] overflow-hidden">
+      <Link href={`/doctors/${doctor.slug}`} className="block">
+        <div className="relative aspect-[4/5] overflow-hidden">
+          <motion.div
+            className="h-full w-full"
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <Image
               src={doctor.image}
               alt={doctor.name}
               fill
+              className="object-cover"
               sizes="(max-width: 768px) 90vw, 360px"
               priority={index < 3}
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-light/70 to-transparent" />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
+
+          <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <div className="flex flex-wrap gap-1.5 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+              {doctor.specialties.slice(0, 2).map((s) => (
+                <span key={s} className="rounded-full bg-white/20 backdrop-blur-md px-2.5 py-1 text-[10px] font-semibold text-white border border-white/30">
+                  {s}
+                </span>
+              ))}
+            </div>
+            <h3 className="font-display text-xl font-bold text-white">{doctor.name}</h3>
+            <p className="text-white/70 text-sm">{doctor.title}</p>
           </div>
-        </div>
-        <div className="px-5 py-6">
-          <div className="mb-4 flex flex-wrap gap-2">
-            {doctor.specialties.slice(0, 2).map((specialty) => (
-              <span key={specialty} className="pill !min-h-8 !px-3 !py-1 text-[0.68rem]">
-                {specialty}
-              </span>
-            ))}
-          </div>
-          <h3 className="font-display text-2xl font-black text-brand-light">{doctor.name}</h3>
-          <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-brand-muted">{doctor.title}</p>
-          <div className="group mt-6 inline-flex items-center gap-3 text-sm font-black text-brand-gold-dark">
-            View profile
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-secondary transition-transform duration-300 group-hover:translate-x-1">
-              +
-            </span>
+
+          <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/95 flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 delay-100">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="-rotate-45 group-hover:rotate-0 transition-transform duration-500">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="#0891B2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         </div>
       </Link>

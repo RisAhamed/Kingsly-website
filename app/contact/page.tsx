@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import MagneticButton from '@/components/MagneticButton'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
@@ -29,7 +30,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="gold-line mx-auto" />
-          <h1 className="section-title text-5xl md:text-6xl tracking-tight leading-snug">Contact Us</h1>
+          <h1 className="section-title text-5xl md:text-6xl"><span className="text-accent-italic">Contact</span> Us</h1>
           <p className="section-subtitle mx-auto mt-4">We&apos;d love to hear from you</p>
         </motion.div>
       </section>
@@ -44,7 +45,7 @@ export default function ContactPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Send us a Message</h2>
+            <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]">Send us a <span className="text-accent-italic">Message</span></h2>
             {submitted ? (
               <motion.div
                 className="text-center py-12"
@@ -99,9 +100,11 @@ export default function ContactPage() {
                     className="w-full bg-brand-primary border border-brand-border rounded-xl px-4 py-3 text-white placeholder:text-brand-muted focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 outline-none transition-colors resize-none"
                   />
                 </div>
-                <button type="submit" className="btn-gold w-full py-4">
-                  Send Message
-                </button>
+                <MagneticButton as="button">
+                  <button type="submit" className="btn-gold w-full py-4">
+                    Send Message
+                  </button>
+                </MagneticButton>
               </form>
             )}
           </motion.div>
@@ -113,7 +116,7 @@ export default function ContactPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Get in Touch</h2>
+            <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]">Get in <span className="text-accent-italic">Touch</span></h2>
             <div className="space-y-8">
               {/* Phone */}
               <div>
@@ -170,7 +173,7 @@ export default function ContactPage() {
                   </div>
                   <span className="text-brand-muted text-sm">Address</span>
                 </div>
-                <p className="text-white">Tamil Nadu, India</p>
+                <p className="text-white">112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India</p>
               </div>
 
               {/* Working Hours */}
@@ -196,10 +199,10 @@ export default function ContactPage() {
         {/* Google Maps */}
         <div className="mt-12 rounded-2xl overflow-hidden border border-brand-border">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.123456789!2d77.123456789!3d11.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDA3JzI0LjQiTiA3N8KwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.930014087931!2d80.1246316!3d12.925283399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525fcbed8b8ed3%3A0x1744fc252dd9590c!2s112%2C%20Gandhi%20Rd%2C%20West%20Tambaram%2C%20Tambaram%2C%20Chennai%2C%20Tamil%20Nadu%20600045%2C%20India!5e0!3m2!1sen!2sin!4v1"
             width="100%"
             height="400"
-            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.1)' }}
+            style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -208,10 +211,10 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Mobile Floating Call Button */}
+      {/* Floating Call Button */}
       <motion.a
         href="tel:+919976658340"
-        className="fixed bottom-6 right-6 z-40 md:hidden w-14 h-14 rounded-full bg-brand-gold flex items-center justify-center shadow-lg shadow-brand-gold/30 transition-all duration-300"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-brand-gold flex items-center justify-center shadow-lg shadow-brand-gold/30 transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         animate={{ boxShadow: ['0 0 0 0 rgba(200,169,110,0.4)', '0 0 0 20px rgba(200,169,110,0)', '0 0 0 0 rgba(200,169,110,0.4)'] }}

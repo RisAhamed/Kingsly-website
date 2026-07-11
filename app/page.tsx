@@ -1,11 +1,15 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import DoctorCard from '@/components/DoctorCard';
 import ServiceCard from '@/components/ServiceCard';
 import VideoBackground from '@/components/VideoBackground';
+import MagneticButton from '@/components/MagneticButton';
 import { clinicInfo, doctors, facilityImages, services } from '@/lib/doctors';
 
 const stats = [
@@ -36,18 +40,70 @@ const fadeUp = {
 };
 
 export default function HomePage() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !heroRef.current) return;
+
+    gsap.to('.hero-video-bg', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+    });
+    gsap.to('.hero-headline', {
+      yPercent: -40,
+      opacity: 0.3,
+      ease: 'none',
+      scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+    });
+
+    return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
+  }, []);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    document.querySelectorAll('.stat-number').forEach((el) => {
+      const raw = el.textContent || '0';
+      const num = parseInt(raw.replace(/[^0-9]/g, ''), 10);
+      const suffix = raw.replace(/[0-9]/g, '');
+      if (isNaN(num) || num === 0) return;
+      gsap.fromTo(
+        el,
+        { textContent: 0 },
+        {
+          textContent: num,
+          duration: 1.5,
+          ease: 'power2.out',
+          snap: { textContent: 1 },
+          onUpdate: () => {
+            const current = parseInt(el.textContent || '0', 10);
+            el.textContent = current + suffix;
+          },
+          scrollTrigger: { trigger: el, start: 'top 85%' },
+        }
+      );
+    });
+  }, []);
+
   return (
     <div className="noise-overlay page-shell">
-      <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden px-6 pb-16 pt-28">
-        <VideoBackground src="/videos/hero-bg.mp4" />
+      <section ref={heroRef} className="hero-section relative isolate flex min-h-[100dvh] items-center overflow-hidden px-6 pb-16 pt-28">
+        <div className="hero-video-bg absolute inset-0">
+          <VideoBackground src="/videos/hero-bg.mp4" />
+        </div>
         <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#063947]/90 via-[#063947]/62 to-[#063947]/20" />
 
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }}>
-            <motion.span variants={fadeUp} className="section-kicker !border-white/20 !bg-white/12 !text-white">
+            <motion.span variants={fadeUp} className="section-kicker !text-white/80">
               Kingslyn Dental Care
             </motion.span>
-            <motion.h1 variants={fadeUp} className="text-hero font-display font-black tracking-normal text-white">
+            <motion.h1 variants={fadeUp} className="hero-headline text-hero font-display font-black tracking-normal text-white">
               Your Smile, Our Priority
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-hero-sub font-medium text-cyan-50/86">
@@ -55,9 +111,11 @@ export default function HomePage() {
               and calm patient care.
             </motion.p>
             <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <Link href="/booking" className="btn-gold !bg-white !text-brand-light hover:!bg-cyan-50">
-                Book Appointment
-              </Link>
+              <MagneticButton>
+                <Link href="/contact" className="btn-gold !bg-white !text-brand-light hover:!bg-cyan-50">
+                  Contact Us
+                </Link>
+              </MagneticButton>
               <Link href="/doctors" className="btn-outline !border-white/25 !bg-white/10 !text-white hover:!bg-white/18">
                 Meet Our Doctors
               </Link>
@@ -113,7 +171,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-3xl">
             <span className="section-kicker">Expert team</span>
-            <h2 className="section-title tracking-tight leading-snug">Meet the specialists behind every confident smile.</h2>
+            <h2 className="section-title">Seven specialists. <span className="text-accent-italic">One</span> standard of care.</h2>
             <p className="section-subtitle mt-5">
               Cosmetic dentistry, root canals, orthodontics, pediatric care, implants, prosthodontics, and preventive
               dentistry are handled by focused clinicians.
@@ -140,7 +198,7 @@ export default function HomePage() {
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <span className="section-kicker">Treatment lines</span>
-              <h2 className="section-title tracking-tight leading-snug">Complete dental care in one coordinated clinic.</h2>
+              <h2 className="section-title">Every treatment, under <span className="text-accent-italic">one</span> roof.</h2>
             </div>
             <p className="section-subtitle lg:justify-self-end">
               From routine scaling to complex implant restorations, services are organized around clarity,
@@ -160,7 +218,7 @@ export default function HomePage() {
           <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
               <span className="section-kicker">Clinic environment</span>
-              <h2 className="section-title tracking-tight leading-snug">Designed for hygiene, comfort, and confidence.</h2>
+              <h2 className="section-title">Built on <span className="text-accent-italic">sterilization</span>. Designed for calm.</h2>
             </div>
             <Link href="/about" className="btn-outline md:mb-2">
               Step Inside
@@ -192,9 +250,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-brand-light p-6 text-white shadow-[0_34px_110px_rgba(14,95,115,0.18)] md:p-12">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <span className="section-kicker !border-white/15 !bg-white/10 !text-cyan-100">Patient words</span>
-              <h2 className="font-display text-[clamp(2.3rem,5vw,4.6rem)] font-black tracking-tight leading-snug">
-                Care that feels composed from arrival to follow-up.
+              <span className="section-kicker !text-cyan-100/80">Patient words</span>
+              <h2 className="font-display text-[clamp(2.3rem,5vw,4.6rem)] font-black tracking-[-0.02em] leading-[0.98]">
+                What patients notice <span className="text-accent-italic">first</span> — and remember longest.
               </h2>
             </div>
             <div className="grid gap-4">
@@ -215,15 +273,17 @@ export default function HomePage() {
           <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 to-black/20" />
         </div>
         <div className="relative mx-auto max-w-5xl text-center">
-          <span className="section-kicker">Appointments</span>
-          <h2 className="section-title tracking-tight leading-snug">Ready for a healthier smile?</h2>
+          <span className="section-kicker">Get in touch</span>
+          <h2 className="section-title">Your next appointment <span className="text-accent-italic">starts here</span>.</h2>
           <p className="section-subtitle mx-auto mt-5">
-            Call the clinic or book online. The team will help match your concern with the right doctor.
+            Call the clinic or message us online. The team will help match your concern with the right doctor.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-            <Link href="/booking" className="btn-gold">
-              Book Appointment
-            </Link>
+            <MagneticButton>
+              <Link href="/contact" className="btn-gold">
+                Contact Us
+              </Link>
+            </MagneticButton>
             <a href={clinicInfo.phoneLink} className="btn-outline">
               {clinicInfo.phone}
             </a>

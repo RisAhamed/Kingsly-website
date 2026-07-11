@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 import VideoBackground from '@/components/VideoBackground'
+import MagneticButton from '@/components/MagneticButton'
 import { services, doctors } from '@/lib/doctors'
 
 function getDoctorName(slug: string): string {
@@ -45,7 +46,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="gold-line mx-auto" />
-            <h1 className="section-title text-5xl md:text-6xl tracking-tight leading-snug">Our Services</h1>
+            <h1 className="section-title text-5xl md:text-6xl">Our <span className="text-accent-italic">Services</span></h1>
             <p className="section-subtitle mx-auto mt-4">Comprehensive dental care for every need</p>
           </motion.div>
         </div>
@@ -117,7 +118,9 @@ export default function ServicesPage() {
       {/* Bottom CTA */}
       <section className="text-center px-6 pb-20">
         <p className="text-brand-muted mb-6">Can&apos;t find what you&apos;re looking for?</p>
-        <Link href="/contact" className="btn-gold">Contact Us</Link>
+        <MagneticButton>
+          <Link href="/contact" className="btn-gold">Contact Us</Link>
+        </MagneticButton>
       </section>
     </>
   )

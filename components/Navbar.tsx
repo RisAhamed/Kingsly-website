@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
+import MagneticButton from '@/components/MagneticButton';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -72,9 +73,11 @@ export default function Navbar() {
             >
               +91 99766 58340
             </a>
-            <Link href="/booking" className="btn-gold !min-h-11 !px-5 !py-2.5">
-              Book Appointment
-            </Link>
+            <MagneticButton>
+              <Link href="/contact" className="btn-gold !min-h-11 !px-5 !py-2.5">
+                Contact Us
+              </Link>
+            </MagneticButton>
           </div>
 
           <button
@@ -143,9 +146,11 @@ export default function Navbar() {
                 <a href="tel:+919976658340" className="mt-3 block text-2xl font-black text-brand-light transition-all duration-300 hover:text-brand-gold">
                   +91 99766 58340
                 </a>
-                <Link href="/booking" className="btn-gold mt-5 w-full">
-                  Book Appointment
-                </Link>
+                <MagneticButton>
+                  <Link href="/contact" className="btn-gold mt-5 w-full">
+                    Contact Us
+                  </Link>
+                </MagneticButton>
               </div>
             </div>
           </motion.div>

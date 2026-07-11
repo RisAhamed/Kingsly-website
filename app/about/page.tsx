@@ -117,7 +117,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="gold-line mx-auto" />
-          <h1 className="section-title text-5xl md:text-6xl">About Kingslyn Dental Care</h1>
+          <h1 className="section-title text-5xl md:text-6xl"><span className="text-accent-italic">About</span> Kingslyn Dental Care</h1>
           <p className="section-subtitle mx-auto mt-4">Where your smile is our priority since 2007</p>
         </motion.div>
       </section>
@@ -125,7 +125,7 @@ export default function AboutPage() {
       {/* Our Story */}
       <section className="max-w-4xl mx-auto px-6 py-20">
         <div className="gold-line" />
-        <h2 className="text-3xl font-display font-bold mb-8 tracking-tight leading-snug">Our Story</h2>
+        <h2 className="text-3xl font-display font-bold mb-8 tracking-[-0.02em] leading-[0.98]">Our <span className="text-accent-italic">Story</span></h2>
         <div className="space-y-6 text-lg leading-relaxed text-brand-light/80">
           <p>
             Founded in 2007 by Dr. C. Kingston, Kingslyn Dental Care was born from a simple yet powerful vision:
@@ -153,7 +153,7 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="text-center mb-12">
           <div className="gold-line mx-auto" />
-          <h2 className="section-title tracking-tight leading-snug">Our Facilities</h2>
+          <h2 className="section-title">Our <span className="text-accent-italic">Facilities</span></h2>
           <p className="section-subtitle mx-auto">Modern spaces designed for your comfort and care</p>
         </div>
         <div ref={facilitiesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -180,7 +180,7 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="text-center mb-12">
           <div className="gold-line mx-auto" />
-          <h2 className="section-title tracking-tight leading-snug">Why Choose Us</h2>
+          <h2 className="section-title">Why <span className="text-accent-italic">Choose</span> Us</h2>
           <p className="section-subtitle mx-auto">What makes Kingslyn Dental Care the right choice</p>
         </div>
         <div ref={whyRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

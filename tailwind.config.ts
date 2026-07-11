@@ -23,6 +23,7 @@ const config: Config = {
           muted: '#5E7480',
           light: '#123B46',
           border: 'rgba(8,145,178,0.16)',
+          'warm-accent': '#D4A574',
         },
       },
       fontFamily: {

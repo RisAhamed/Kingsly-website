@@ -19,7 +19,9 @@
 8. [Tailwind Theme](#8-tailwind-theme)
 9. [Animation System](#9-animation-system)
 10. [Content Inventory](#10-content-inventory)
-11. [Build & Run Commands](#11-build--run-commands)
+11. [V2 Premium UI/UX Upgrade](#11-v2-premium-uiux-upgrade)
+12. [Changelog](#12-changelog)
+13. [Build & Run Commands](#13-build--run-commands)
 
 ---
 
@@ -36,8 +38,6 @@ C:\Users\riswa\Desktop\AAA\client\Kingstly-website\
 ├── app/                                      # Next.js App Router pages
 │   ├── about/
 │   │   └── page.tsx                          # About page
-│   ├── booking/
-│   │   └── page.tsx                          # Multi-step booking form
 │   ├── contact/
 │   │   └── page.tsx                          # Contact form + info
 │   ├── doctors/
@@ -51,10 +51,12 @@ C:\Users\riswa\Desktop\AAA\client\Kingstly-website\
 │   └── page.tsx                              # Homepage
 │
 ├── components/                               # Reusable React components
-│   ├── DoctorCard.tsx                        # Doctor profile card
+│   ├── CustomCursor.tsx                      # Custom cursor follower (V2)
+│   ├── DoctorCard.tsx                        # Doctor profile card (V2 rewrite)
 │   ├── Footer.tsx                            # Site footer with clinic hours
+│   ├── MagneticButton.tsx                    # Magnetic spring-button wrapper (V2)
 │   ├── Navbar.tsx                            # Responsive navigation header
-│   ├── ServiceCard.tsx                       # Service offering card
+│   ├── ServiceCard.tsx                       # Service offering card (V2 upgraded)
 │   ├── SmoothScrollProvider.tsx              # Lenis smooth scroll wrapper
 │   └── VideoBackground.tsx                   # HTML5 video with fallback
 │
@@ -149,8 +151,8 @@ C:\Users\riswa\Desktop\AAA\client\Kingstly-website\
 - `next` — React framework with App Router, SSR, static generation
 - `react` / `react-dom` — UI library
 - `gsap` / `@gsap/react` — GreenSock Animation Platform for scroll-triggered animations
-- `framer-motion` — Motion library for page transitions, staggered reveals, hover effects
-- `lenis` — Smooth scroll engine with native-like inertia
+- `framer-motion` — Motion library for page transitions, staggered reveals, hover effects, 3D card tilt, magnetic buttons, custom cursor
+- `lenis` — Smooth scroll engine with native-like inertia (duration: 1.2s)
 
 ### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\next.config.js`
 
@@ -219,6 +221,7 @@ import './globals.css';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
 
 export const metadata: Metadata = {
   title: 'Kingslyn Dental Care | Premium Dental Clinic in Tamil Nadu',
@@ -231,6 +234,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className="min-h-screen bg-brand-primary font-sans text-brand-light antialiased">
         <SmoothScrollProvider>
+          <CustomCursor />
           <Navbar />
           <main>{children}</main>
           <Footer />
@@ -241,7 +245,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 }
 ```
 
-**Structure:** Wraps every page with smooth scroll (Lenis), sticky Navbar at top, Footer at bottom. Global metadata for SEO.
+**Structure:** Wraps every page with smooth scroll (Lenis), custom cursor (spring-loaded, disabled on touch devices via `(pointer: coarse)`), sticky Navbar at top, Footer at bottom. Global metadata for SEO. All pages use `bg-brand-primary` (`#F5FCFD`) with a multi-layered gradient body background.
 
 ---
 
@@ -250,17 +254,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 **Route:** `/`
 
 **Sections (in order):**
-1. **Hero** — Full-viewport video background (`hero-bg.mp4`) with gradient overlay, headline "Your Smile, Our Priority", sub-tagline, two CTAs ("Book Appointment" / "Meet Our Doctors"), and a floating dental chair image card with "Sterile care model" caption.
-2. **Stats Bar** — 4 responsive metric cards: 7 Specialist doctors, 17+ Years of clinical leadership, 9 Core dental service lines, 100% Sterilization-first protocols.
-3. **Expert Team** — Section kicker "Expert team", H2 "Meet the specialists behind every confident smile.", horizontal-scrolling row of 6 DoctorCards with "View All Doctors" link.
-4. **Treatment Lines** — Floating blue orb decoration, section kicker "Treatment lines", H2 "Complete dental care in one coordinated clinic.", 3-column grid of ServiceCards.
-5. **Clinic Environment** — Section kicker "Clinic environment", H2 "Designed for hygiene, comfort, and confidence.", 4-column facility image grid with captions.
-6. **Testimonials** — Dark-themed container, section kicker "Patient words", H2 "Care that feels composed from arrival to follow-up.", 3 testimonial cards with patient quotes.
-7. **CTA** — Video background (`cta-bg.mp4`) with dark overlay, section kicker "Appointments", H2 "Ready for a healthier smile?", two CTAs ("Book Appointment" / phone number).
+1. **Hero** — Full-viewport video background (`hero-bg.mp4`) with GSAP parallax (video `yPercent: 20` at 0.5x scroll speed, headline `yPercent: -40` at 1.2x scroll speed with `opacity: 0.3` fade), gradient overlay (`from-[#063947]/90 via-[#063947]/62 to-[#063947]/20`), headline "Your Smile, Our Priority" (`.text-hero`: `clamp(3.6rem, 10vw, 8rem)`, `line-height: 0.95`), sub-tagline, magnetic CTAs ("Contact Us" via `MagneticButton` wrapper with spring physics / "Meet Our Doctors" via `btn-outline`), and a floating dental chair image card with "Sterile care model" caption inside a `rounded-[2.5rem]` glass frame.
+2. **Stats Bar** — 4 responsive metric cards with GSAP number count-up animation on scroll into view.
+3. **Expert Team** — Section kicker "Expert team", H2 "Seven specialists. One standard of care.", horizontal-scrolling row of 6 DoctorCards (with 3D tilt + hover reveal interactions) and "View All Doctors" link.
+4. **Treatment Lines** — Floating blue orb decoration, section kicker "Treatment lines", H2 "Every treatment, under one roof.", 3-column grid of ServiceCards (with 3D tilt interaction).
+5. **Clinic Environment** — Section kicker "Clinic environment", H2 "Built on sterilization. Designed for calm.", 4-column facility image grid with captions.
+6. **Testimonials** — Dark-themed container, section kicker "Patient words", H2 "What patients notice first — and remember longest.", 3 testimonial cards with patient quotes.
+7. **CTA** — Video background (`cta-bg.mp4`) with dark overlay, section kicker "Get in touch", H2 "Your next appointment starts here.", magnetic CTAs ("Contact Us" via `/contact` / phone number via `tel:`).
 
 **Data sources:** `clinicInfo`, `doctors`, `facilityImages`, `services` from `@/lib/doctors`
 
-**Animations:** Framer Motion `fadeUp` variant (opacity 0→1, y: 32→0) with staggered children and `whileInView` triggers.
+**Animations:** Framer Motion `fadeUp` variant (opacity 0→1, y: 32→0) with staggered children and `whileInView` triggers. GSAP parallax on hero section. GSAP count-up on stats.
+
+**V2 Upgrades:**
+- Hero parallax (video + headline on independent scroll axes via GSAP ScrollTrigger)
+- Stats count-up animation (GSAP `textContent` from 0→target with `+` / `%` suffix handling)
+- Magnetic buttons on all CTAs (13 instances across site, spring physics `stiffness: 150, damping: 15, mass: 0.1`)
+- Editorial copy with italic accent words (`text-accent-italic` → `#D4A574`)
+- All `/booking` CTAs redirected to `/contact` (booking page removed)
 
 ---
 
@@ -285,7 +296,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 **Sections:**
 1. **Hero** — Full-viewport video background (`services-hero-bg.mp4`), title "Our Services", subtitle "Comprehensive dental care for every need".
 2. **Accordion** — All 9 services as expandable accordion items (glass cards). Each shows SVG icon, title, chevron toggle. On expand: description + "Handled by" doctor pills linking to doctor profiles.
-3. **CTA** — "Can't find what you're looking for? Contact Us" link.
+3. **CTA** — "Can't find what you're looking for?" magnetic "Contact Us" link.
 
 **Animations:** Framer Motion `AnimatePresence` for accordion height transitions (0→auto), GSAP stagger on accordion items.
 
@@ -310,11 +321,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 **Sections:**
 1. **Breadcrumb** — Home / Doctors / Dr. Name
-2. **Hero Split** — Left: doctor name (H1), title, specialty pills, languages, experience, "Book Appointment" CTA. Right: doctor photo in 3:4 aspect ratio.
+2. **Hero Split** — Left: doctor name (H1), title, specialty pills, languages, experience, magnetic "Book Appointment" CTA. Right: doctor photo in 3:4 aspect ratio.
 3. **Specialties** — Gold line, H2 "Specialties", all specialty pills with GSAP stagger animation.
 4. **About** — Gold line, H2 "About", bio split into 4-sentence paragraphs.
 5. **Education Timeline** — Gold line, H2 "Education" (if education data exists). Vertical timeline with gradient line, circle markers, institution/degree/year.
-6. **CTA** — Glass card with "Book an Appointment with {doctor.name}", CTA button.
+6. **CTA** — Glass card with "Book an Appointment with {doctor.name}", magnetic CTA button.
 
 **Data:** `doctors[]` from `@/lib/doctors`, matched by `slug` param.
 
@@ -322,21 +333,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 ---
 
-### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\app\booking\page.tsx` (Booking Page)
+---
 
-**Route:** `/booking`
-
-**Multi-step form with 4 steps:**
-1. **Choose Your Doctor** — Grid of doctor cards with photo, name, title. Selected state uses gold border + glow.
-2. **Select Date & Time** — Date picker (min: tomorrow) + time slot grid (8 slots).
-3. **Your Details** — Name, phone (required), email, reason for visit textarea.
-4. **Confirm Your Appointment** — Summary card showing doctor, date, time, patient name, phone.
-
-**Progress bar:** 4-step visual indicator with completed/active/pending states.
-
-**Submission:** Animated success screen with SVG circle checkmark drawn via GSAP strokeDashoffset animation.
-
-**Validation:** Step progression gated by `canProceed()` — requires doctor selection, date+time, name+phone.
+> **⚠️ Booking page removed.** All `href="/booking"` links were replaced with `href="/contact"`. See [Contact Page](#cusersriswadesktoppaclientkingstly-websiteappcontactpage.tsx-contact-page) for the replacement CTA destination.
 
 ---
 
@@ -344,12 +343,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 **Route:** `/contact`
 
+**Serving as:** Primary CTA destination after booking page removal. All `Book Appointment` links across the site now point here.
+
 **Sections:**
-1. **Hero** — Image background (waiting area), title "Contact Us".
-2. **Contact Form** — Glass card with name, email, phone, message fields. Submit shows animated "Message Sent!" confirmation.
-3. **Contact Info** — Glass card with phone (clickable), social media (Facebook/Instagram with hover animations), address, working hours.
-4. **Google Maps** — Styled iframe embed with inverted color filter.
-5. **Mobile FAB** — Fixed bottom-right floating call button with pulsing shadow animation (mobile only via `md:hidden`).
+1. **Hero** — Image background (`/images/waitingarea.png`), gradient overlay (`bg-brand-primary/70`), gold line accent, title "Contact Us" (`.section-title`, `text-accent-italic` on "Contact").
+2. **Contact Form** — Glass card with name, email, phone, message fields. Magnetic "Send Message" submit button (`MagneticButton as="button"`). Submit shows animated "Message Sent!" confirmation (with OK icon in `rounded-full` circle).
+3. **Contact Info** — Glass card with:
+   - **Phone** — Clickable `tel:+919976658340`, displayed at `text-2xl font-display font-bold text-brand-gold` with phone SVG icon in gold-tinted circle.
+   - **Social Media** — Facebook and Instagram links with Framer Motion `whileHover={{ y: -4, scale: 1.05 }}`.
+   - **Address** — Full address displayed: `"112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tambaram, Tamil Nadu 600045, India"`.
+   - **Working Hours** — Mon–Thu: 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM; Fri: 10:00 AM - 01:00 PM, 04:00 PM - 06:30 PM; Sat: 06:00 PM - 09:00 PM; Sun: 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM.
+4. **Google Maps** — Live Google Maps iframe embed with real coordinates (`12.9252833, 80.1246316`) for the clinic address. Full-width `rounded-2xl overflow-hidden border border-brand-border`. No CSS filter (clean embed).
+5. **Floating Call Button** — Fixed `bottom-6 right-6 z-40` round gold button (`w-14 h-14`, `rounded-full bg-brand-gold`) visible on **all screen sizes** (no `md:hidden`). Opens phone dialer via `tel:+919976658340`. Pulsing shadow animation via Framer Motion `animate` with repeating `boxShadow` keyframes. Phone SVG icon in `stroke-[#0a0e17]`.
 
 ---
 
@@ -363,8 +368,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 - Rounded pill-shaped container (16px padding, `rounded-full`)
 - Logo (clickable to home) with hover scale animation
 - Desktop nav: 5 links (Home, Doctors, Services, About, Contact) with active state highlighting
-- Desktop right side: phone number + gold "Book Appointment" CTA
-- Mobile: hamburger button (animated to X), full-screen overlay menu with staggered link animations, quick appointment card with phone + CTA
+- Desktop right side: phone number + magnetic gold "Contact Us" CTA (via `MagneticButton` wrapper, links to `/contact`)
+- Mobile: hamburger button (animated to X via 3 independent `<span>` bars with `translate-y` + `rotate` transforms), full-screen overlay menu with staggered link animations (`AnimatePresence` + `motion.div` with `delay: 0.04 * index`), quick contact card with phone number + "Contact Us" CTA (via `MagneticButton`, links to `/contact`)
 - Closes mobile menu on route change via `usePathname()`
 
 **Nav links data:**
@@ -385,8 +390,8 @@ const NAV_LINKS = [
 **Purpose:** 3-column site footer with brand info, quick links, and clinic hours.
 
 **Columns:**
-1. **Brand** — Logo, clinic name, tagline, two CTAs ("Call Clinic" via `tel:`, "Book Visit" via `/booking`)
-2. **Explore** — Quick links to 5 pages, Facebook & Instagram social buttons
+1. **Brand** — Logo, clinic name, tagline, two CTAs (magnetic "Call Clinic" via `tel:`, "Contact Us" via `/contact` using `btn-outline`)
+2. **Explore** — Quick links to 4 pages (Home (via logo), Doctors, Services, About, Contact) — Booking link removed. Facebook & Instagram social buttons.
 3. **Clinic Hours** — 7-day schedule as flex rows with day/time alignment using `flex justify-between items-center w-full border-b border-gray-200 py-2`
 
 **Hours data:**
@@ -401,9 +406,9 @@ Sunday:          10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM
 
 ---
 
-### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\ServiceCard.tsx`
+### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\ServiceCard.tsx` (V2 Upgraded)
 
-**Purpose:** Reusable service offering card with hover effects.
+**Purpose:** Reusable service offering card with premium 3D tilt hover interaction.
 
 **Props:**
 ```ts
@@ -414,20 +419,23 @@ interface ServiceCardProps {
 ```
 
 **Rendering:**
-- `<motion.article>` with Framer Motion `whileInView` fade-up animation
+- `<motion.article>` with 3D cursor-reactive tilt (max 6° via Framer Motion `rotateX/rotateY`)
+- Custom cubic-bezier easing `[0.16, 1, 0.3, 1]` for premium deceleration feel
 - SVG icon in brand-secondary rounded square
-- Category label (uppercase, tracking-wide, muted)
+- Category label (uppercase, `tracking-[0.25em]`, muted)
 - Service title (H3, Outfit font, black weight)
 - Description paragraph
 - "Explore treatment" CTA with `+` in circle that slides right on hover (`group-hover:translate-x-1`)
-- Hover: `hover:shadow-xl hover:-translate-y-1 transition-all duration-300`
-- Background: `bg-gray-50`
+- Hover: `shadow-sm` → `shadow-2xl`
+- Background: white with `shadow-sm`
+
+**V2 Upgrades:** 3D tilt on mouse move, refined shadow transition, custom easing curve.
 
 ---
 
-### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\DoctorCard.tsx`
+### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\DoctorCard.tsx` (V2 Rewrite)
 
-**Purpose:** Reusable doctor profile card with image and details.
+**Purpose:** Reusable doctor profile card with layered premium hover interactions.
 
 **Props:**
 ```ts
@@ -438,14 +446,17 @@ interface DoctorCardProps {
 ```
 
 **Rendering:**
-- `<motion.article>` with fade-up animation
-- `<Link>` wrapping to `/doctors/[slug]`
-- Doctor photo (4:5 aspect ratio) with hover zoom (`group-hover:scale-[1.04]`) and bottom gradient
-- Specialty pills (max 2 shown)
-- Doctor name (H3), title/role
-- "View profile" CTA with animated `+` circle
-- Hover: `hover:shadow-xl hover:-translate-y-1 transition-all duration-300`
-- Background: `bg-gray-50`
+- `<motion.article>` with `ref` and `transformStyle: 'preserve-3d'`
+- 3D cursor-reactive tilt (max 6°) via `onMouseMove`/`onMouseLeave`
+- Custom cubic-bezier easing `[0.16, 1, 0.3, 1]`
+- **Image:** Independent scale on hover (`whileHover: scale(1.08)`) for parallax depth illusion
+- **Gradient overlay:** `from-black/70 via-black/10 to-transparent`, intensifies on hover (`opacity 70% → 90%`)
+- **Specialty pills:** Hidden by default; slide up + fade in exclusively on hover (`translate-y-2 → translate-y-0`, `opacity-0 → opacity-100`)
+- **Circular arrow CTA:** Scales in from 0 on hover at top-right, arrow rotates from -45° → 0°
+- Doctor name (white text over gradient), title/role
+- Hover: `shadow-sm` → `shadow-2xl`
+
+**V2 Upgrades (complete rewrite):** 3D tilt, independent image scale, hover-reveal specialty pills, circular arrow button, dark gradient overlay, premium easing.
 
 ---
 
@@ -457,7 +468,7 @@ interface DoctorCardProps {
 ```ts
 interface VideoBackgroundProps {
   src: string;
-  overlay?: boolean;  // default: true — adds gradient overlay
+  overlay?: boolean;
   className?: string;
 }
 ```
@@ -484,11 +495,47 @@ interface VideoBackgroundProps {
 
 ---
 
+### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\MagneticButton.tsx` (V2 New)
+
+**Purpose:** Spring-physics magnetic button wrapper that attracts cursor on hover.
+
+**Props:**
+```ts
+interface MagneticButtonProps {
+  children: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
+```
+
+**Behavior:**
+- Wraps any button/link element with a `motion.div`
+- On mouse move: calculates cursor position relative to element center, translates toward cursor by 30% of offset
+- Spring physics: `stiffness: 150, damping: 15, mass: 0.1` for premium tactile feel
+- Returns to origin on mouse leave
+- Used on all primary CTAs across the site (13 instances)
+
+---
+
+### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\components\CustomCursor.tsx` (V2 New)
+
+**Purpose:** Custom cursor follower providing premium tactile feedback.
+
+**Behavior:**
+- Spring-loaded circular cursor follower (`stiffness: 300, damping: 20, mass: 0.5`)
+- Base size: 16px diameter; expands to 64px on hover over cards/buttons/links
+- Displays "View" label when hovering over `<article>` elements (doctor/service cards)
+- Auto-disables on touch devices via `window.matchMedia('(pointer: coarse)')`
+- Rendered at `z-[999]` with `pointer-events: none`
+- Warm accent (`brand-warm-accent`) border and background
+
+---
+
 ## 5. Data Layer (lib)
 
 ### `C:\Users\riswa\Desktop\AAA\client\Kingstly-website\lib\doctors.tsx`
 
-**Central data file** — exports 7 data structures used across the application.
+**Central data file** — exports 7 data structures used across the application. Note: file renamed from `.ts` to `.tsx` to support JSX (inline SVG icons).
 
 #### `Doctor` Interface
 ```ts
@@ -521,6 +568,8 @@ export interface Doctor {
 
 #### 9 Services (with SVG Icons)
 
+Each service has a custom inline SVG icon (24×24, stroke-based line art in dental shapes) replacing the original 2-letter text abbreviations.
+
 | # | Title | Category | Doctors |
 |---|-------|----------|---------|
 | 1 | Cosmetic Dentistry | Cosmetic | Dr. C. Kingston, Dr. Janlyn Kingston |
@@ -532,8 +581,6 @@ export interface Doctor {
 | 7 | Prosthodontics | Implants | Dr. Sethuraman, Dr. Janlyn Kingston |
 | 8 | Preventive Care & Scaling | General | Dr. Janlyn Kingston, Dr. R. Snega Latha |
 | 9 | Tooth Extraction | General | Dr. Janlyn Kingston, Dr. R. Snega Latha |
-
-Each service has a custom inline SVG icon (24×24, stroke-based line art) replacing prior text abbreviations.
 
 #### `clinicInfo`
 ```ts
@@ -601,9 +648,10 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 | Class | Purpose | Key Styles |
 |-------|---------|------------|
 | `.page-shell` | Page wrapper | `relative overflow-hidden` |
-| `.section-kicker` | Section eyebrow badge | `rounded-full bg-blue-50 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-blue-800` |
-| `.section-title` | H2 section heading | `font-display text-[clamp(2.4rem,6vw,5.5rem)] font-black tracking-tight leading-snug` |
-| `.section-subtitle` | Section description | `max-w-2xl text-base leading-8 md:text-lg text-brand-muted` |
+| `.section-kicker` | Editorial section eyebrow | `inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-brand-gold-dark`, `::before` 24px horizontal rule |
+| `.section-title` | H2 section heading | `font-display text-[clamp(2.6rem,7vw,6.5rem)] font-black tracking-[-0.02em] leading-[0.98] text-brand-light` |
+| `.section-subtitle` | Section description | `max-w-xl text-[15px] leading-8 md:text-lg text-brand-muted/80 font-medium` |
+| `.text-accent-italic` | Editorial emphasis (V2) | `italic font-light text-brand-warm-accent` |
 | `.text-hero` | Hero H1 | `font-size: clamp(3.6rem, 10vw, 8rem); line-height: 0.95` |
 | `.text-hero-sub` | Hero subtitle | `font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.75` |
 | `.surface-card` / `.glass-card` | Card container | `rounded-[2rem] border shadow transition-all duration-500`, hover: `translateY(-4px)`, gold border |
@@ -618,6 +666,12 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 | `.noise-overlay` | Subtle grain texture | Fixed SVG noise at `opacity: 0.018` |
 | `.sticky-header` | Navbar scroll state | `backdrop-filter: blur(12px)` with semi-transparent background |
 | `.horizontal-scroll` | Horizontal scroll container | Flexbox with scroll-snap, hidden scrollbar |
+
+**V2 Changes:**
+- `.section-kicker`: Removed pill shape (`bg-blue-50 rounded-full`), changed to editorial `::before` line + smaller `11px` text with loose `tracking-[0.25em]`
+- `.section-title`: Increased size ceiling to `6.5rem`, added `tracking-[-0.02em]`, tighter `leading-[0.98]`
+- `.section-subtitle`: Reduced max-width to `max-w-xl`, lighter `font-medium` weight, `text-brand-muted/80`
+- New `.text-accent-italic` class for editorial emphasis words using `text-brand-warm-accent`
 
 ### Reduced Motion
 ```css
@@ -649,6 +703,7 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 | `brand-muted` | `#5E7480` | Body/secondary text |
 | `brand-light` | `#123B46` | Heading/primary text |
 | `brand-border` | `rgba(8,145,178,0.16)` | Borders, dividers |
+| `brand-warm-accent` | `#D4A574` | **V2:** Warm sand/gold for italic emphasis, checkmark, sparing use |
 
 ### Fonts
 - **Sans:** `"Plus Jakarta Sans"`, `"Aptos"`, `system-ui`, `sans-serif`
@@ -676,26 +731,30 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 - **Homepage:** `fadeUp` variants (opacity + translateY), staggered on hero content, `whileInView` on stats/services/facilities
 - **Services accordion:** `AnimatePresence` with height 0→auto transitions
 - **Doctors filter:** `AnimatePresence` with `popLayout` + scale transitions
-- **Booking steps:** Slide variants (enter/center/exit) with `AnimatePresence`
 - **Navbar mobile:** Slide-down overlay with staggered children
-- **Doctor/Service cards:** `whileInView` fade-up with delay based on index
+- **Doctor/Service cards:** 3D tilt via `rotateX/rotateY` bound to cursor position; `whileInView` fade-up; premium easing `[0.16, 1, 0.3, 1]`
+- **Magnetic buttons:** Spring physics (`stiffness: 150, damping: 15, mass: 0.1`) for cursor attraction
+- **Custom cursor:** `useSpring` (`stiffness: 300, damping: 20`) with smooth lag-follow; scale transitions on hover targets
 
 ### GSAP (Scroll-Triggered)
+- **Homepage hero:** Parallax — video `yPercent: 20`, headline `yPercent: -40 + opacity: 0.3`
+- **Homepage stats:** Number count-up from 0 to target value with suffix handling (`+`, `%`)
 - **About page:** Parallax hero image, facility items stagger, why-choose cards stagger
 - **Doctor profile:** Specialties stagger, timeline line draw, timeline items stagger, CTA fade-in
 - **Doctors listing:** Header text stagger, filter pills stagger
 - **Services page:** Accordion items stagger
-- **Booking success:** Circle checkmark stroke-dashoffset animation
+- **Booking success (deprecated):** Circle checkmark stroke-dashoffset animation (booking page removed)
 
 ### Lenis (Smooth Scroll)
 - Global smooth scrolling with `duration: 1.2`
 - Respects `prefers-reduced-motion` with runtime monitoring
 
-### Tailwind Hover Effects
-- Cards: `hover:shadow-xl hover:-translate-y-1` with `transition-all duration-300`
-- CTA buttons (`+`): `group-hover:translate-x-1 transition-transform duration-300`
-- Images: `group-hover:scale-[1.04]` (doctor cards), `group-hover:scale-110` (facility grid)
-- Buttons: `hover:translateY(-2px)` via CSS component classes
+### Tailwind Hover Effects (V2 Updated)
+- **Doctor cards:** 3D cursor tilt (6° max) + image scale (1.08) + specialty pills slide-up + arrow CTA scale-in
+- **Service cards:** 3D cursor tilt (6° max)
+- **CTA buttons (`+`):** `group-hover:translate-x-1 transition-transform duration-300`
+- **Images:** `group-hover:scale-[1.04]` (doctor cards), `group-hover:scale-110` (facility grid)
+- **Buttons:** Magnetic spring attraction via `MagneticButton` wrapper; `hover:translateY(-2px)` via CSS
 
 ---
 
@@ -706,7 +765,7 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 #### Homepage
 - **Kickers:** "Kingslyn Dental Care", "Expert team", "Treatment lines", "Clinic environment", "Patient words", "Appointments"
 - **H1:** "Your Smile, Our Priority"
-- **H2s:** "Meet the specialists behind every confident smile.", "Complete dental care in one coordinated clinic.", "Designed for hygiene, comfort, and confidence.", "Care that feels composed from arrival to follow-up.", "Ready for a healthier smile?"
+- **H2s (V2 editorial rewrite):** "Seven specialists. One standard of care.", "Every treatment, under one roof.", "Built on sterilization. Designed for calm.", "What patients notice first — and remember longest.", "Your next appointment starts here."
 - **Stats:** 7 Specialist doctors, 17+ Years of clinical leadership, 9 Core dental service lines, 100% Sterilization-first protocols
 - **Testimonials:** Priya S., Rajesh M., Lakshmi V.
 
@@ -725,14 +784,12 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 - **7 Doctor profiles** with specialties, education, experience, bios
 - **Filter categories:** All, Cosmetic, Orthodontics, Pediatric, Implants, Periodontics, General
 
-#### Booking Page
-- **H1:** "Book Your Appointment"
-- **4 steps:** Choose Your Doctor, Select Date & Time, Your Details, Confirm Your Appointment
-
 #### Contact Page
-- **H1:** "Contact Us"
-- **H2s:** "Send us a Message", "Get in Touch"
-- **Contact info:** Phone, Facebook, Instagram, Address, Working Hours
+- **H1:** "Contact Us" (`text-accent-italic` on "Contact")
+- **H2s:** "Send us a Message" (`text-accent-italic` on "Message"), "Get in Touch" (`text-accent-italic` on "Touch")
+- **Contact info:** Phone (`+91 99766 58340`), Facebook, Instagram, Address (`112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India`), Working Hours
+- **Google Maps:** Live embed at `12.9252833, 80.1246316`
+- **Floating call button:** Always visible, auto-dials on click
 
 ### Social Media
 - Facebook: `https://www.facebook.com/share/1HJcck1h3L/`
@@ -743,7 +800,50 @@ Multi-layered gradient with two radial spots (cyan and teal) over a linear gradi
 
 ---
 
-## 11. Build & Run Commands
+## 11. V2 Premium UI/UX Upgrade
+
+The following upgrades were applied in the V2 pass to eliminate the "AI-generated" generic feel and add premium, tactile, high-end motion quality:
+
+| Task | File(s) | What Changed |
+|------|---------|--------------|
+| **1. Typography System** | `app/globals.css`, all page files | Editorial section kickers (`::before` rule, `11px`, `tracking-[0.25em]`), larger titles (`6.5rem` cap, `-0.02em` tracking, `0.98` leading), lighter subtitles, `.text-accent-italic` utility with warm accent for single-word emphasis in every H2/H1 |
+| **2. Doctor/Service Card Hover** | `components/DoctorCard.tsx`, `components/ServiceCard.tsx` | Complete rewrite: 3D cursor tilt (6° max), independent image scale, hover-reveal specialty pills, circular arrow CTA, premium cubic-bezier easing `[0.16, 1, 0.3, 1]` |
+| **3. Magnetic Buttons** | `components/MagneticButton.tsx`, 9 page files | New spring-physics button wrapper; applied to all 13 `btn-gold` instances across site |
+| **4. Copy Rewrite** | `app/page.tsx` | All 5 homepage H2s rewritten with editorial rhythm variation (short fragments, varied cadence) |
+| **5. Parallax Hero** | `app/page.tsx` | GSAP ScrollTrigger: video background at 0.5x scroll, headline at 1.2x scroll with opacity fade |
+| **6. Stats Count-Up** | `app/page.tsx` | GSAP `textContent` animation from 0→target with suffix handling on scroll into view |
+| **7. Custom Cursor** | `components/CustomCursor.tsx`, `app/layout.tsx` | Spring-loaded cursor follower (`stiffness: 300, damping: 20, mass: 0.5`); scales from 16px→64px on hover over cards/buttons/links; "View" label on `<article>` elements; disabled on touch via `(pointer: coarse)` |
+| **8. Warm Accent Color** | `tailwind.config.ts`, `app/globals.css` | Added `brand-warm-accent: #D4A574`; applied to italic emphasis via `.text-accent-italic` |
+
+---
+
+## 12. Changelog
+
+### V3 — Booking Removal & Contact Redirection
+| Change | File(s) | Detail |
+|--------|---------|--------|
+| **Booking page deleted** | `app/booking/page.tsx` | Entire multi-step booking form removed. Route `/booking` no longer exists. |
+| **All CTAs redirected to Contact** | `app/page.tsx` (2x), `components/Navbar.tsx` (2x), `components/Footer.tsx` (2x), `app/doctors/[slug]/page.tsx` (2x) | Every `href="/booking"` changed to `href="/contact"`. Button text updated from "Book Appointment" / "Book Visit" to "Contact Us". |
+| **Footer quick links cleaned** | `components/Footer.tsx` | "Booking" entry removed from `QUICK_LINKS` array (now 4 links). |
+| **Homepage CTA copy updated** | `app/page.tsx` | Section kicker changed from "Appointments" to "Get in touch". Body text updated to say "message us online" instead of "book online". |
+| **Contact page — full address** | `app/page.tsx` | Address field updated to: `112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India`. |
+| **Contact page — live Google Maps** | `app/contact/page.tsx` | Google Maps iframe `src` updated with real coordinates (`12.9252833, 80.1246316`), clean embed with no CSS filter. |
+| **Contact page — floating call button** | `app/contact/page.tsx` | `md:hidden` class removed — button now visible on all screen sizes. Auto-dials `+91 99766 58340` on click. |
+
+### V2 — Premium UI/UX Upgrade (see [Section 11](#11-v2-premium-uiux-upgrade))
+Eight-task upgrade eliminating "AI-generated" generic feel: Typography, DoctorCard rewrite, Magnetic buttons, Copy rewrite, Parallax hero, Count-up stats, Custom cursor, Warm accent color.
+
+### V1 — Initial Premium Upgrades
+- Section-kicker pill badges
+- H2 `tracking-tight` / `leading-snug` applied to 12 heading instances
+- SVG icons replacing text abbreviations (9 services)
+- Card hover effects (`bg-gray-50`, `shadow-xl`, `translate-y-1`)
+- Footer clinic hours refactored to flex layout
+- `group-hover` slide animation on CTA buttons
+
+---
+
+## 13. Build & Run Commands
 
 ```bash
 # Development server

@@ -61,8 +61,8 @@ export default function DoctorsPage() {
           ref={headerRef}
           className="relative z-10 text-center px-6 py-28 max-w-3xl mx-auto"
         >
-          <h1 data-header-anim className="section-title tracking-tight leading-snug">
-            Our Expert Team
+          <h1 data-header-anim className="section-title">
+            Our <span className="text-accent-italic">Expert</span> Team
           </h1>
           <p
             data-header-anim

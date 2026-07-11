@@ -1,341 +1,349 @@
 
 =================================================================
-KINGSLYN DENTAL CARE — WEBSITE V1 MASTER BUILD PROMPT
-(Paste this entire prompt into Claude Code / GitHub Copilot / Cursor)
+KINGSLYN DENTAL CARE — V2 PREMIUM UI/UX UPGRADE PROMPT
+(Paste directly into Claude Code / Cursor / GitHub Copilot inside the 
+risahamed-kingsly-website repo. This is a SURGICAL upgrade, not a rebuild.)
 =================================================================
 
-ROLE: You are a senior full-stack developer + creative technologist. Build a 
-premium, highly-animated, multi-page dental clinic website inspired by the 
-interaction quality of lusion.co, formless.xyz, gufram.it, and 
-labs.noomoagency.com — but tailored for a real dental clinic (Kingslyn Dental Care).
-
-TECH STACK (use exactly this):
-- Next.js 14+ (App Router, TypeScript)
-- TailwindCSS
-- GSAP + ScrollTrigger (scroll-driven reveals, pinning, parallax)
-- Framer Motion (page transitions, micro-interactions, hover states)
-- Lenis (global smooth scroll)
-- Spline OR React Three Fiber (optional 3D hero accent — abstract tooth/particle shape)
-- Supabase (doctor data + booking form storage)
-- next/image for all image optimization
+CONTEXT: This is an existing Next.js 14 + TypeScript + Tailwind CSS 3 + 
+Framer Motion + GSAP + Lenis project. Do NOT change the tech stack, file 
+structure, or data layer (lib/doctors.tsx). Do NOT rebuild pages from 
+scratch. This is a targeted visual + interaction craft pass on EXISTING 
+components to eliminate the "AI-generated" generic feel and add the 
+premium, tactile, high-end motion quality seen on lusion.co, gufram.it, 
+formless.xyz, and labs.noomoagency.com.
 
 =================================================================
-BRAND ASSETS (already provided by user, located in /public/images/)
+ROOT DIAGNOSIS: WHY IT FEELS GENERIC RIGHT NOW
 =================================================================
-- logo.png                     -> Use as favicon AND top-left navbar logo on every page
-- clinicouterlook.png          -> About page, footer background
-- dentalchair.png              -> Services page, homepage feature section
-- operatory1.png, operatory2.png -> Facilities/gallery section
-- reception.png                -> About page / facilities section
-- sterilazationroom.png        -> "Hygiene & Safety" trust section (Dr. Kingston emphasizes sterilization)
-- waitingarea.png               -> Contact/facilities section
-- Dr. C. Kingston.png          -> Doctor profile: Dr. C. Kingston
-- Dr. Janlyn Kingston.png      -> Doctor profile: Dr. Janlyn Kingston
-- Dr Anand kasi.png            -> Doctor profile: Dr. Anand Kasi
-- Dr Praveen.png               -> Doctor profile: Dr. Praveen
-- Dr Aravind.png               -> Doctor profile: Dr. Aravind V
-- Dr. Sethuraman.png           -> Doctor profile: Dr. Sethuraman
-- Dr. R. Snega Latha.png       -> Doctor profile: Dr. R. Snega Latha
-
-FAVICON INSTRUCTION: Convert logo.png to favicon.ico and multiple sizes 
-(16x16, 32x32, 180x180 apple-touch-icon). Place logo.png in navbar top-left 
-on every page, linking to homepage, height ~40-48px, with a subtle 
-scale-up hover animation (Framer Motion whileHover={{ scale: 1.05 }}).
+1. Typography lacks CONTRAST and RHYTHM — headings and body text sit at 
+   similar visual weight; there's no dramatic size/weight jump between 
+   kicker -> H2 -> body that premium sites use to create hierarchy tension.
+2. Color palette is functionally cyan/teal but named "gold" in the codebase 
+   (--color-gold: #0891B2) — this naming mismatch suggests the color system 
+   was never intentionally art-directed; it's a placeholder that stuck.
+3. Doctor/Service cards have ONLY a translateY(-4px) + shadow-xl on hover — 
+   this is a "safe default," not a premium interaction. There's no scale, 
+   no cursor-reactive tilt, no content reveal, no image parallax.
+4. Section copy (H2s like "Complete dental care in one coordinated clinic") 
+   reads as competent but flat — no rhythm variation, no punctuation 
+   personality, every H2 follows the identical "Adjective + Noun + Clinic 
+   descriptor" pattern, which is the textbook AI-generated cadence.
+5. No cursor-following interactions, no magnetic buttons, no depth layering 
+   via parallax — the site is animated but not INTERACTIVE in the tactile 
+   sense used in the reference sites.
 
 =================================================================
-CLINIC CONTACT INFO (use in Footer + Contact page + Navbar CTA)
+TASK 1 — TYPOGRAPHY SYSTEM OVERHAUL
 =================================================================
-Phone: +91 99766 58340
-Facebook: https://www.facebook.com/share/1HJcck1h3L/
-Instagram: https://www.instagram.com/kingstonchellapandian
-Clinic Name: Kingslyn Dental Care
+File: tailwind.config.ts + app/globals.css
 
-=================================================================
-DOCTOR DATA (build a Supabase table `doctors` and seed with this data,
-OR hardcode as a doctors.ts array for V1 if Supabase setup isn't ready yet)
-=================================================================
+Current fonts: "Plus Jakarta Sans" (sans) + "Outfit" (display) — KEEP THESE, 
+they are good choices. The problem is EXECUTION, not font choice.
 
-1. Dr. C. Kingston
-   slug: dr-c-kingston
-   image: /images/Dr. C. Kingston.png
-   title: Kingslyn Dental Care | Expert Cosmetic Dentistry
-   languages: Hindi, English
-   specialties: Restorative Dental Treatments, Root Canal Therapy (Endodontics), Aesthetic Dental Treatments
-   experience: 17 years General Dentistry + 9 years Endodontics
-   education: 
-     - Balaji Dental College and Hospital, Chennai — BDS (2007)
-     - Rajas Dental College and Hospital, Tirunelveli — MDS (2015)
-     - SRM University, Chennai — PhD (in progress)
-   bio: [Use the full "About" text provided by user verbatim — emphasize 
-        sterilization standards, affordability, restorative/esthetic/endodontic expertise]
+FIX — Update these exact classes in globals.css:
 
-2. Dr. Janlyn Kingston
-   slug: dr-janlyn-kingston
-   image: /images/Dr. Janlyn Kingston.png
-   title: Chief Dental Surgeon, BDS
-   specialties: Teeth Scaling and Polishing, Tooth Removal (Extraction), 
-     Preventive Dental Care Services, Aesthetic Dental Treatments, 
-     Dental Prosthetics and Restorations
-   bio: [Use full "About" text — emphasize patient-centered care, advanced techniques]
+.section-kicker {
+  /* CURRENT: rounded-full bg-blue-50 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-blue-800 */
+  /* NEW: tighter, smaller, more restrained — premium sites use SMALL kickers, not badge-shaped pills */
+  @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-brand-gold-dark mb-4;
+}
+/* Add a small horizontal line before the kicker text for editorial feel: */
+.section-kicker::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+}
 
-3. Dr. Anand Kasi
-   slug: dr-anand-kasi
-   image: /images/Dr Anand kasi.png
-   title: Pedodontist (Pediatric Dentist)
-   specialties: Pediatric Dentistry Services
-   bio: [Use full "About" text — emphasize gentle approach with children, community outreach]
+.section-title {
+  /* CURRENT: font-display text-[clamp(2.4rem,6vw,5.5rem)] font-black tracking-tight leading-snug */
+  /* NEW: increase size ceiling, tighten leading further, add negative letter-spacing at large sizes */
+  @apply font-display text-[clamp(2.6rem,7vw,6.5rem)] font-black tracking-[-0.02em] leading-[0.98];
+}
 
-4. Dr. Praveen
-   slug: dr-praveen
-   image: /images/Dr Praveen.png
-   title: Orthodontist
-   specialties: Braces and Orthodontic Services
-   bio: [Use full "About" text — emphasize clear aligners, 3D treatment planning]
+.section-subtitle {
+  /* NEW: increase contrast against title by making body text lighter weight and more muted */
+  @apply max-w-xl text-[15px] leading-8 md:text-lg text-brand-muted/80 font-medium;
+}
 
-5. Dr. Aravind V
-   slug: dr-aravind-v
-   image: /images/Dr Aravind.png
-   title: Periodontist
-   specialties: Gum Disease Treatment (Periodontics)
-   bio: [Use full "About" text — emphasize gum grafting, implant placement]
-
-6. Dr. Sethuraman
-   slug: dr-sethuraman
-   image: /images/Dr. Sethuraman.png
-   title: Prosthodontist & Implantologist
-   specialties: Dental Implant Solutions, Advanced Prosthodontic Solutions
-   bio: [Use full "About" text — emphasize 3D printing, custom prosthesis craftsmanship]
-
-7. Dr. R. Snega Latha
-   slug: dr-r-snega-latha
-   image: /images/Dr. R. Snega Latha.png
-   title: General Dentist, BDS
-   specialties: Tooth Removal (Extraction), Preventive Dental Care Services, 
-     Teeth Scaling and Polishing
-   bio: [Use full "About" text — emphasize compassionate patient-centered general care]
+ADD a new utility class for "editorial" emphasis words within headings 
+(use for one key word per H2, wrapped in a <span>):
+.text-accent-italic {
+  @apply italic font-light text-brand-gold-dark;
+}
+Example usage: "Complete dental care in <span class='text-accent-italic">one</span> coordinated clinic."
+This single-word italic treatment is what creates the premium editorial 
+feel seen in Gufram/Formless — apply it to ONE word in every H2 across 
+Homepage, About, Services, Doctors, Booking, Contact.
 
 =================================================================
-PAGE-BY-PAGE BUILD SPEC
+TASK 2 — DOCTOR CARD: PREMIUM HOVER INTERACTION REBUILD
 =================================================================
+File: components/DoctorCard.tsx
 
---- 1. HOMEPAGE (app/page.tsx) ---
-SECTIONS (top to bottom):
-a) Navbar (fixed, transparent-to-solid on scroll via GSAP ScrollTrigger):
-   logo.png top-left, links: Home / Doctors / Services / About / Contact, 
-   "Book Appointment" CTA button (right), phone number icon-link.
+CURRENT BEHAVIOR: fade-up on scroll-in, hover: shadow-xl + -translate-y-1, 
+image hover: scale-[1.04]. This is too subtle and generic.
 
-b) Hero Section (100vh):
-   - Full-bleed AI-generated background video (see VIDEO PROMPTS section below, video: hero-bg.mp4)
-   - Overlay: dark gradient for text legibility
-   - Animated headline "Your Smile, Our Priority" — Framer Motion stagger text reveal 
-     (each word fades+slides up with 0.05s delay between words)
-   - Subheadline: "Kingslyn Dental Care — Trusted Dental Excellence in Tamil Nadu"
-   - CTA buttons: "Book Appointment" (primary) + "Meet Our Doctors" (secondary), 
-     both with magnetic hover effect (GSAP mousemove-based translate)
-   - Scroll-down indicator (bouncing chevron, GSAP infinite yoyo animation)
+REPLACE with this layered interaction (write this as the new component):
 
-c) Trust Bar (horizontal scroll-in stats, GSAP ScrollTrigger stagger):
-   "7 Expert Doctors" | "17+ Years Experience" | "Sterilized Instruments" | 
-   "Affordable Care" — each stat counts up from 0 using GSAP on scroll into view.
+```tsx
+'use client';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+import type { Doctor } from '@/lib/doctors';
 
-d) Doctors Preview Section:
-   - Section heading "Meet Our Specialists" (fade+slide in on scroll)
-   - Horizontal scrollable card row (or grid on mobile) of all 7 doctors
-   - Each card: doctor image (next/image, object-cover), name, specialty tag
-   - Card hover: GSAP 3D tilt effect (rotateX/rotateY based on mouse position) 
-     + image slight zoom (scale 1.08) + shadow lift
-   - Click card -> Framer Motion shared layout transition -> navigates to 
-     /doctors/[slug] (use Next.js <Link>)
-   - "View All Doctors" link at end of row
+export default function DoctorCard({ doctor, index }: { doctor: Doctor; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
-e) Services Preview Section:
-   - Background video: services-bg.mp4 (subtle, low-opacity, behind cards)
-   - Grid of service categories: Cosmetic Dentistry, Root Canal (Endodontics), 
-     Braces/Orthodontics, Pediatric Dentistry, Gum Treatment (Periodontics), 
-     Dental Implants, Teeth Cleaning/Scaling, Tooth Extraction
-   - Each card: icon + title + one-line description
-   - GSAP ScrollTrigger: cards stagger-animate in (y:60->0, opacity:0->1, 0.1s stagger)
-   - Hover: card lifts (translateY -8px) + border glow (accent color)
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    setRotate({ x: y * -6, y: x * 6 }); // max 6deg tilt, subtle not gimmicky
+  }
 
-f) Facilities/Gallery Section ("Step Inside Our Clinic"):
-   - Use images: clinicouterlook.png, operatory1.png, operatory2.png, 
-     reception.png, sterilazationroom.png, waitingarea.png, dentalchair.png
-   - Masonry or horizontal-scroll gallery layout
-   - GSAP ScrollTrigger horizontal scroll-jacking OR simple pinned horizontal 
-     scroll section (pin the section, translateX images as user scrolls vertically)
-   - Caption overlay on hover for each image (e.g., "Sterilization Room — 
-     Safety First" for sterilazationroom.png)
+  function handleMouseLeave() {
+    setRotate({ x: 0, y: 0 });
+  }
 
-g) Testimonials Section:
-   - Auto-scrolling infinite carousel (Framer Motion animate x with repeat: Infinity)
-   - Placeholder testimonial cards (3-5), star ratings, patient name
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+      animate={{ rotateX: rotate.x, rotateY: rotate.y }}
+      className="group relative overflow-hidden rounded-[1.75rem] bg-white shadow-sm hover:shadow-2xl transition-shadow duration-500"
+    >
+      <Link href={`/doctors/${doctor.slug}`} className="block">
+        <div className="relative aspect-[4/5] overflow-hidden">
+          <motion.div
+            className="h-full w-full"
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image
+              src={doctor.image}
+              alt={doctor.name}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+          {/* Gradient overlay that intensifies on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
 
-h) Final CTA Section:
-   - Full-width background video (cta-bg.mp4)
-   - Large headline "Ready for a Healthier Smile?"
-   - "Book Your Appointment" button, phone number displayed large
+          {/* Specialty pills that SLIDE UP from below on hover */}
+          <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <div className="flex flex-wrap gap-1.5 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+              {doctor.specialties.slice(0, 2).map((s) => (
+                <span key={s} className="rounded-full bg-white/20 backdrop-blur-md px-2.5 py-1 text-[10px] font-semibold text-white border border-white/30">
+                  {s}
+                </span>
+              ))}
+            </div>
+            <h3 className="font-display text-xl font-bold text-white">{doctor.name}</h3>
+            <p className="text-white/70 text-sm">{doctor.title}</p>
+          </div>
 
-i) Footer:
-   - logo.png + clinic name
-   - Quick links (Doctors, Services, About, Contact)
-   - Social icons linking to Facebook and Instagram (provided URLs)
-   - Phone number, address placeholder
-   - Copyright line
-
---- 2. DOCTORS LISTING PAGE (app/doctors/page.tsx) ---
-- Page header with title "Our Expert Team" + subtle background video (doctors-listing-bg.mp4, very low opacity, behind text only)
-- Grid of all 7 doctor cards (responsive: 1 col mobile, 2 col tablet, 3 col desktop)
-- Each card identical style to homepage preview but slightly larger
-- Filter/tag pills at top: "All", "Cosmetic", "Orthodontics", "Pediatric", 
-  "Implants", "Periodontics", "General" — clicking filters the grid 
-  (Framer Motion AnimatePresence for smooth add/remove of filtered cards)
-- Click any card -> navigate to /doctors/[slug]
-
---- 3. DOCTOR PROFILE PAGE (app/doctors/[slug]/page.tsx) — DYNAMIC ROUTE ---
-- Fetch doctor by slug (from doctors.ts array or Supabase)
-- If not found: call notFound()
-- Layout:
-  a) Hero: doctor image (large, right side) + name, title, specialties tags (left side)
-     Background: subtle gradient, NOT a video (keep focus on doctor)
-     Framer Motion page entrance: image slides in from right, text from left
-  b) Languages Spoken section (pill badges)
-  c) Top Specialties (animated pill list, GSAP stagger on scroll)
-  d) About section (full bio text from data, readable typography, max-width for readability)
-  e) Education timeline (if available) — vertical timeline with GSAP 
-     ScrollTrigger draw-in line animation connecting each degree
-  f) "Book Appointment with [Doctor Name]" CTA button at bottom
-  g) Back button / breadcrumb (Home > Doctors > [Doctor Name])
-
---- 4. SERVICES PAGE (app/services/page.tsx) ---
-- Background video: services-hero-bg.mp4 (hero section only)
-- List all services derived from doctor specialties, grouped:
-  Cosmetic Dentistry | Root Canal Therapy | Orthodontics (Braces) | 
-  Pediatric Dentistry | Periodontics (Gum Treatment) | Dental Implants | 
-  Prosthodontics | Preventive Care (Scaling/Cleaning) | Extractions
-- Each service: expandable accordion (Framer Motion height animation) 
-  with description + "which doctor handles this" link back to doctor profile
-- GSAP ScrollTrigger reveal for each accordion row on scroll
-
---- 5. ABOUT PAGE (app/about/page.tsx) ---
-- Background image: clinicouterlook.png (parallax effect via GSAP, 
-  moves slower than scroll speed)
-- Clinic story/mission section
-- Facilities showcase using reception.png, sterilazationroom.png, 
-  waitingarea.png, operatory1.png, operatory2.png — grid with hover zoom
-- "Why Choose Us" section: Sterilization Standards, Affordable Care, 
-  Experienced Team, Modern Technology — 4 animated icon cards
-
---- 6. BOOKING PAGE (app/booking/page.tsx) ---
-- Multi-step form (Framer Motion AnimatePresence between steps):
-  Step 1: Select Doctor (dropdown/cards, pre-fill if coming from doctor profile page)
-  Step 2: Select Date & Time
-  Step 3: Patient details (name, phone, reason for visit)
-  Step 4: Confirmation
-- Progress bar animates with GSAP as user moves through steps
-- Submit -> store in Supabase `appointments` table
-- Success animation: checkmark draw-in (SVG path animation via GSAP)
-
---- 7. CONTACT PAGE (app/contact/page.tsx) ---
-- Background: waitingarea.png with dark overlay
-- Contact form (name, email, message) + phone number + social links 
-  (Facebook, Instagram icons, animated hover bounce)
-- Google Maps embed (placeholder location)
-- Click-to-call button for mobile: tel:+919976658340
-
-=================================================================
-GLOBAL ANIMATION RULES (apply everywhere)
-=================================================================
-1. Install: npm install gsap @gsap/react framer-motion lenis
-2. Root layout.tsx: initialize Lenis smooth scroll globally (see code pattern below)
-3. Every section entering viewport: GSAP ScrollTrigger fade+slide (opacity 0->1, y:60->0, duration:1, ease:"power3.out")
-4. Every page transition: Framer Motion AnimatePresence with mode="wait", 
-   0.5s fade+slight vertical shift
-5. Every clickable card/button: subtle hover scale (1.03-1.08) + shadow lift
-6. Every image: next/image with blur placeholder, lazy loaded except hero images (priority=true)
-7. Respect prefers-reduced-motion: wrap all GSAP/Framer animations with a check 
-   and disable heavy motion for users who request it
-8. Mobile: disable heavy 3D tilt/parallax effects, keep simple fade-ins only 
-   (performance + smaller screens don't benefit from tilt effects)
-
-LENIS SETUP CODE (put in app/layout.tsx or a ClientLayout wrapper):
-```
-'use client'
-import { useEffect } from 'react'
-import Lenis from 'lenis'
-
-export function SmoothScrollProvider({ children }) {
-  useEffect(() => {
-    const lenis = new Lenis({ duration: 1.2, smoothWheel: true })
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-    return () => lenis.destroy()
-  }, [])
-  return <>{children}</>
+          {/* "View Profile" circular button that scales in on hover, top-right */}
+          <div className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/95 flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-400 delay-100">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="-rotate-45 group-hover:rotate-0 transition-transform duration-500">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="#0891B2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </Link>
+    </motion.article>
+  );
 }
 ```
 
-=================================================================
-AI BACKGROUND VIDEO PROMPTS (Google Veo 3 — each generates 8s, loop-ready)
-=================================================================
-Generate each in Google AI Studio (aistudio.google.com/models/veo-3), 
-download as MP4, convert to WebM with ffmpeg, place in /public/videos/
+KEY IMPROVEMENTS THIS ADDS:
+- Cursor-reactive 3D tilt (subtle, max 6deg — professional not gimmicky)
+- Image scales independently from card on hover (parallax depth illusion)
+- Specialty pills hidden by default, slide up + fade in ONLY on hover 
+  (this is the "pop-up" interaction you specifically asked for)
+- Circular arrow button scales in from 0 with a rotation reveal
+- Custom cubic-bezier easing [0.16, 1, 0.3, 1] — this exact curve is what 
+  Lusion/Gufram use for that "premium deceleration" feel, NOT default ease
 
-PLACEMENT MAP:
-| Video filename          | Page/Section              |
-|--------------------------|----------------------------|
-| hero-bg.mp4              | Homepage hero (full screen)|
-| services-bg.mp4          | Homepage services preview (low opacity)|
-| cta-bg.mp4               | Homepage final CTA section |
-| doctors-listing-bg.mp4   | Doctors listing page header (very low opacity)|
-| services-hero-bg.mp4     | Services page hero         |
-
-NOTE ON 8-SECOND LIMIT: Since Veo generates only 8-10 second clips, always 
-add "seamless loop" and "no jump cuts" to every prompt, then in code use:
-<video autoPlay muted loop playsInline> — the loop attribute handles 
-continuous playback automatically once you have a clean seamless clip. 
-For extra safety, use a crossfade technique: duplicate the video element 
-and crossfade between two instances at the loop point using Framer Motion 
-opacity animation timed to the video duration, eliminating any visible seam.
+Apply the SAME pattern (tilt + hover reveal + circular CTA) to ServiceCard.tsx 
+for consistency across the site.
 
 =================================================================
-FOLDER STRUCTURE TO SCAFFOLD
+TASK 3 — MAGNETIC BUTTON INTERACTION (Global)
 =================================================================
-app/
-├── layout.tsx (Lenis + Navbar + Footer + Framer AnimatePresence wrapper)
-├── page.tsx (Homepage)
-├── doctors/
-│   ├── page.tsx
-│   └── [slug]/page.tsx
-├── services/page.tsx
-├── about/page.tsx
-├── booking/page.tsx
-├── contact/page.tsx
-components/
-├── Navbar.tsx
-├── Footer.tsx
-├── VideoBackground.tsx
-├── DoctorCard.tsx
-├── ServiceCard.tsx
-├── SmoothScrollProvider.tsx
-lib/
-├── doctors.ts (hardcoded array OR supabase client fetch)
-public/
-├── images/ (all provided images)
-├── videos/ (Veo-generated videos)
-├── favicon.ico (generated from logo.png)
+Create new file: components/MagneticButton.tsx
+
+```tsx
+'use client';
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+
+export default function MagneticButton({ children, className = '', ...props }: any) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLButtonElement>) {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+    setPos({ x, y });
+  }
+
+  return (
+    <motion.button
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setPos({ x: 0, y: 0 })}
+      animate={{ x: pos.x, y: pos.y }}
+      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+}
+```
+
+Replace all `.btn-gold` / `.btn-primary` CTA buttons across Homepage hero, 
+CTA section, Navbar "Book Appointment", and Booking page submit button 
+with this MagneticButton wrapper. This single change is the highest-impact 
+fix for the "premium feel" — magnetic buttons are the signature interaction 
+of every reference site you listed.
 
 =================================================================
-EXECUTION INSTRUCTION FOR YOU (Claude Code / Copilot)
+TASK 4 — COPY REWRITE (Eliminate "AI-Generated" Text Cadence)
 =================================================================
-Build this as a working Next.js project, page by page, starting with 
-project scaffolding + layout + Navbar/Footer, then Homepage, then Doctors 
-listing + dynamic profile pages, then remaining pages. After each page, 
-pause and show me the result before continuing to the next. Use the 
-doctor bio text I provide verbatim — do not shorten or paraphrase it. 
-Use placeholder video tags where Veo videos aren't generated yet 
-(fallback to a static gradient background) so the site still renders 
-correctly before I add the actual video files.
+File: app/page.tsx, app/about/page.tsx, app/services/page.tsx
+
+REPLACE these exact H2 strings with more editorial, varied-rhythm 
+alternatives (mix short punchy phrases with longer descriptive ones — 
+avoid the uniform "Adjective + Noun + Clinic-word" pattern):
+
+| Section | OLD | NEW |
+|---|---|---|
+| Expert Team | "Meet the specialists behind every confident smile." | "Seven specialists. One standard of care." |
+| Treatment Lines | "Complete dental care in one coordinated clinic." | "Every treatment, under <span class='text-accent-italic'>one</span> roof." |
+| Clinic Environment | "Designed for hygiene, comfort, and confidence." | "Built on sterilization. Designed for calm." |
+| Testimonials | "Care that feels composed from arrival to follow-up." | "What patients notice first — and remember longest." |
+| CTA | "Ready for a healthier smile?" | "Your next appointment starts here." |
+
+RULE FOR FUTURE COPY: Vary sentence length deliberately. Never write two 
+consecutive H2s with the same word count or grammatical structure. Use 
+periods to create punchy fragments occasionally instead of always writing 
+complete flowing sentences — this fragment/full-sentence variation is what 
+separates editorial copywriting from AI-default prose.
+
+=================================================================
+TASK 5 — SCROLL-DRIVEN DEPTH: PARALLAX LAYERING
+=================================================================
+File: app/page.tsx (Hero section), app/about/page.tsx (already has some GSAP parallax — extend it)
+
+Add GSAP parallax to Homepage hero: the video background should move at 
+0.5x scroll speed while the headline text moves at 1.2x scroll speed 
+(text exits faster than background), creating depth on scroll:
+
+```tsx
+useGSAP(() => {
+  gsap.to('.hero-video-bg', {
+    yPercent: 20,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'bottom top', scrub: true }
+  });
+  gsap.to('.hero-headline', {
+    yPercent: -40,
+    opacity: 0.3,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'bottom top', scrub: true }
+  });
+}, []);
+```
+
+Add matching classes `hero-video-bg` and `hero-headline` to the relevant 
+elements in the Hero section JSX.
+
+=================================================================
+TASK 6 — STATS BAR: NUMBER COUNT-UP ANIMATION
+=================================================================
+File: app/page.tsx (Stats Bar section)
+
+Current stats ("7 Specialist doctors", "17+ Years...") are likely static 
+text. Add GSAP count-up animation triggered on scroll-into-view:
+
+```tsx
+useGSAP(() => {
+  document.querySelectorAll('.stat-number').forEach((el) => {
+    const target = parseInt(el.textContent || '0', 10);
+    gsap.fromTo(el, { textContent: 0 }, {
+      textContent: target,
+      duration: 1.5,
+      ease: 'power2.out',
+      snap: { textContent: 1 },
+      scrollTrigger: { trigger: el, start: 'top 85%' }
+    });
+  });
+}, []);
+```
+
+=================================================================
+TASK 7 — CUSTOM CURSOR (Optional, High-Impact Signature Touch)
+=================================================================
+Create components/CustomCursor.tsx — a small circular cursor follower that:
+- Scales up to 3x size when hovering over any DoctorCard, ServiceCard, or button
+- Displays "View" text inside the cursor circle when over a doctor card
+- Uses spring physics (framer-motion useSpring) for smooth lag-follow effect
+- Hidden on mobile/touch devices (check via `window.matchMedia('(pointer: coarse)')`)
+
+This is the exact detail that makes Lusion/Noomo Labs feel "designed" 
+rather than templated. Only add this AFTER Tasks 1-6 are complete and 
+verified working.
+
+=================================================================
+TASK 8 — COLOR SYSTEM CLARITY (Low Priority, Do Last)
+=================================================================
+File: tailwind.config.ts, app/globals.css
+
+Rename `--color-gold` / `brand-gold` references are fine to KEEP as-is 
+(renaming would require touching every component file) — but consider 
+adding ONE genuine warm accent color for special moments (e.g., the 
+italic accent text, star ratings in testimonials) to break the cyan/teal 
+monotony:
+```
+--color-warm-accent: #D4A574;  /* warm sand/gold for rare emphasis only */
+```
+Use this ONLY for: testimonial star icons, the italic accent word in H2s, 
+and the booking confirmation checkmark. Do not use it for buttons or 
+primary CTAs — those stay brand-gold (cyan) for consistency.
+
+=================================================================
+EXECUTION ORDER FOR THE AI AGENT
+=================================================================
+1. Task 1 (Typography) — foundational, affects every page instantly
+2. Task 2 (DoctorCard rebuild) — highest visible impact, directly answers 
+   the "doctors list hover pop-up" request
+3. Task 3 (Magnetic buttons) — second highest impact, quick to implement
+4. Task 4 (Copy rewrite) — no code risk, pure text replacement
+5. Task 5 (Parallax hero) — moderate complexity, test scroll performance after
+6. Task 6 (Stats count-up) — small addition, low risk
+7. Task 8 (Color accent) — cosmetic, do last
+8. Task 7 (Custom cursor) — optional, only if time permits, test thoroughly 
+   on both desktop and verify it's disabled on mobile
+
+After each task, run `npm run dev`, visually verify the change in browser, 
+then proceed to the next task. Do not batch all 8 tasks into one commit — 
+commit after each task so changes can be reviewed/reverted independently.
 =================================================================

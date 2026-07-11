@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import MagneticButton from '@/components/MagneticButton'
 import { doctors } from '@/lib/doctors'
 
 function splitBioIntoParagraphs(bio: string): string[] {
@@ -75,7 +76,9 @@ export default function DoctorProfilePage() {
       <div className="min-h-screen flex flex-col items-center justify-center px-6">
         <h1 className="text-4xl font-display font-bold mb-4">Doctor Not Found</h1>
         <p className="text-brand-muted mb-8">The doctor profile you&apos;re looking for doesn&apos;t exist.</p>
-        <Link href="/doctors" className="btn-gold">View All Doctors</Link>
+        <MagneticButton>
+          <Link href="/doctors" className="btn-gold">View All Doctors</Link>
+        </MagneticButton>
       </div>
     )
   }
@@ -105,7 +108,7 @@ export default function DoctorProfilePage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-tight leading-snug">{doctor.name}</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-[-0.02em] leading-[0.98]">{doctor.name}</h1>
             <p className="text-xl text-brand-gold mb-6">{doctor.title}</p>
             <div className="flex flex-wrap gap-2 mb-6">
               {doctor.specialties.map((s, i) => (
@@ -128,9 +131,11 @@ export default function DoctorProfilePage() {
                 <span className="text-sm text-brand-gold font-medium">{doctor.experience}</span>
               </div>
             )}
-            <Link href="/booking" className="btn-gold inline-block">
-              Book Appointment
-            </Link>
+            <MagneticButton>
+              <Link href="/contact" className="btn-gold inline-block">
+                Contact Us
+              </Link>
+            </MagneticButton>
           </motion.div>
 
           {/* Right - Image */}
@@ -157,7 +162,7 @@ export default function DoctorProfilePage() {
       {/* Specialties */}
       <section ref={specialtiesRef} className="max-w-4xl mx-auto px-6 mb-16">
         <div className="gold-line" />
-        <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Specialties</h2>
+        <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]"><span className="text-accent-italic">Specialties</span></h2>
         <div className="flex flex-wrap gap-3">
           {doctor.specialties.map((s, i) => (
             <span key={i} className="spec-pill pill text-base px-5 py-2">{s}</span>
@@ -168,7 +173,7 @@ export default function DoctorProfilePage() {
       {/* About */}
       <section className="max-w-4xl mx-auto px-6 mb-16">
         <div className="gold-line" />
-        <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">About</h2>
+        <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]"><span className="text-accent-italic">About</span></h2>
         <div className="space-y-5">
           {paragraphs.map((p, i) => (
             <p key={i} className="text-lg leading-relaxed text-brand-light/80">{p}</p>
@@ -180,7 +185,7 @@ export default function DoctorProfilePage() {
       {doctor.education && doctor.education.length > 0 && (
         <section ref={timelineRef} className="max-w-4xl mx-auto px-6 mb-16">
           <div className="gold-line" />
-          <h2 className="text-2xl font-display font-bold mb-8 tracking-tight leading-snug">Education</h2>
+          <h2 className="text-2xl font-display font-bold mb-8 tracking-[-0.02em] leading-[0.98]"><span className="text-accent-italic">Education</span></h2>
           <div className="relative pl-8">
             {/* Timeline line */}
             <div
@@ -207,15 +212,17 @@ export default function DoctorProfilePage() {
       {/* CTA */}
       <section ref={ctaRef} className="max-w-4xl mx-auto px-6 py-16 text-center">
         <div className="glass-card p-12 rounded-2xl">
-          <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 tracking-tight leading-snug">
-            Book an Appointment with {doctor.name}
+          <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 tracking-[-0.02em] leading-[0.98]">
+            Book an <span className="text-accent-italic">Appointment</span> with {doctor.name}
           </h2>
           <p className="text-brand-muted mb-8">
             Experience personalized dental care from one of the best specialists in Tamil Nadu
           </p>
-          <Link href="/booking" className="btn-gold text-lg px-10 py-4">
-            Book Appointment
-          </Link>
+          <MagneticButton>
+            <Link href="/contact" className="btn-gold text-lg px-10 py-4">
+              Contact Us
+            </Link>
+          </MagneticButton>
         </div>
       </section>
     </div>
