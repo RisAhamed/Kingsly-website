@@ -29,7 +29,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="gold-line mx-auto" />
-          <h1 className="section-title text-5xl md:text-6xl">Contact Us</h1>
+          <h1 className="section-title text-5xl md:text-6xl tracking-tight leading-snug">Contact Us</h1>
           <p className="section-subtitle mx-auto mt-4">We&apos;d love to hear from you</p>
         </motion.div>
       </section>
@@ -44,7 +44,7 @@ export default function ContactPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-2xl font-display font-bold mb-6">Send us a Message</h2>
+            <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Send us a Message</h2>
             {submitted ? (
               <motion.div
                 className="text-center py-12"
@@ -113,7 +113,7 @@ export default function ContactPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="text-2xl font-display font-bold mb-6">Get in Touch</h2>
+            <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Get in Touch</h2>
             <div className="space-y-8">
               {/* Phone */}
               <div>
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   </div>
                   <span className="text-brand-muted text-sm">Phone</span>
                 </div>
-                <a href="tel:+919976658340" className="text-2xl font-display font-bold text-brand-gold hover:text-brand-gold-light transition-colors">
+                <a href="tel:+919976658340" className="text-2xl font-display font-bold text-brand-gold transition-all duration-300 hover:text-brand-gold-light">
                   +91 99766 58340
                 </a>
               </div>
@@ -211,7 +211,7 @@ export default function ContactPage() {
       {/* Mobile Floating Call Button */}
       <motion.a
         href="tel:+919976658340"
-        className="fixed bottom-6 right-6 z-40 md:hidden w-14 h-14 rounded-full bg-brand-gold flex items-center justify-center shadow-lg shadow-brand-gold/30"
+        className="fixed bottom-6 right-6 z-40 md:hidden w-14 h-14 rounded-full bg-brand-gold flex items-center justify-center shadow-lg shadow-brand-gold/30 transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         animate={{ boxShadow: ['0 0 0 0 rgba(200,169,110,0.4)', '0 0 0 20px rgba(200,169,110,0)', '0 0 0 0 rgba(200,169,110,0.4)'] }}

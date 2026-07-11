@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-3xl">
             <span className="section-kicker">Expert team</span>
-            <h2 className="section-title">Meet the specialists behind every confident smile.</h2>
+            <h2 className="section-title tracking-tight leading-snug">Meet the specialists behind every confident smile.</h2>
             <p className="section-subtitle mt-5">
               Cosmetic dentistry, root canals, orthodontics, pediatric care, implants, prosthodontics, and preventive
               dentistry are handled by focused clinicians.
@@ -140,7 +140,7 @@ export default function HomePage() {
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <span className="section-kicker">Treatment lines</span>
-              <h2 className="section-title">Complete dental care in one coordinated clinic.</h2>
+              <h2 className="section-title tracking-tight leading-snug">Complete dental care in one coordinated clinic.</h2>
             </div>
             <p className="section-subtitle lg:justify-self-end">
               From routine scaling to complex implant restorations, services are organized around clarity,
@@ -160,7 +160,7 @@ export default function HomePage() {
           <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
               <span className="section-kicker">Clinic environment</span>
-              <h2 className="section-title">Designed for hygiene, comfort, and confidence.</h2>
+              <h2 className="section-title tracking-tight leading-snug">Designed for hygiene, comfort, and confidence.</h2>
             </div>
             <Link href="/about" className="btn-outline md:mb-2">
               Step Inside
@@ -193,7 +193,7 @@ export default function HomePage() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <span className="section-kicker !border-white/15 !bg-white/10 !text-cyan-100">Patient words</span>
-              <h2 className="font-display text-[clamp(2.3rem,5vw,4.6rem)] font-black leading-none">
+              <h2 className="font-display text-[clamp(2.3rem,5vw,4.6rem)] font-black tracking-tight leading-snug">
                 Care that feels composed from arrival to follow-up.
               </h2>
             </div>
@@ -212,10 +212,11 @@ export default function HomePage() {
       <section className="relative overflow-hidden px-6 py-20 md:py-28">
         <div className="absolute inset-0 opacity-20">
           <VideoBackground src="/videos/cta-bg.mp4" overlay={false} />
+          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 to-black/20" />
         </div>
         <div className="relative mx-auto max-w-5xl text-center">
           <span className="section-kicker">Appointments</span>
-          <h2 className="section-title">Ready for a healthier smile?</h2>
+          <h2 className="section-title tracking-tight leading-snug">Ready for a healthier smile?</h2>
           <p className="section-subtitle mx-auto mt-5">
             Call the clinic or book online. The team will help match your concern with the right doctor.
           </p>

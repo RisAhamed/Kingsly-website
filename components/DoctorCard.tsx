@@ -19,7 +19,7 @@ export default function DoctorCard({ doctor, index }: DoctorCardProps) {
       transition={{ delay: Math.min(index * 0.05, 0.25), duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
       className="group h-full"
     >
-      <Link href={`/doctors/${doctor.slug}`} className="surface-card block h-full p-2">
+      <Link href={`/doctors/${doctor.slug}`} className="surface-card block h-full p-2 bg-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         <div className="relative overflow-hidden rounded-[1.55rem] bg-brand-secondary">
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
@@ -43,9 +43,9 @@ export default function DoctorCard({ doctor, index }: DoctorCardProps) {
           </div>
           <h3 className="font-display text-2xl font-black text-brand-light">{doctor.name}</h3>
           <p className="mt-2 line-clamp-2 text-sm font-semibold leading-6 text-brand-muted">{doctor.title}</p>
-          <div className="mt-6 inline-flex items-center gap-3 text-sm font-black text-brand-gold-dark">
+          <div className="group mt-6 inline-flex items-center gap-3 text-sm font-black text-brand-gold-dark">
             View profile
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-secondary transition-transform group-hover:translate-x-1">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-secondary transition-transform duration-300 group-hover:translate-x-1">
               +
             </span>
           </div>

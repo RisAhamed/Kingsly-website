@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-6">
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 sticky-header">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full border border-brand-border bg-white/88 px-4 shadow-[0_20px_70px_rgba(14,95,115,0.14)] backdrop-blur-xl md:h-[72px] md:px-5">
           <Link href="/" aria-label="Kingslyn Dental Care Home" className="flex items-center gap-3">
             <motion.span whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="block">
@@ -68,7 +68,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 lg:flex">
             <a
               href="tel:+919976658340"
-              className="rounded-full px-4 py-2 text-sm font-extrabold text-brand-gold-dark transition-colors hover:text-brand-teal"
+              className="rounded-full px-4 py-2 text-sm font-extrabold text-brand-gold-dark transition-all duration-300 hover:text-brand-teal"
             >
               +91 99766 58340
             </a>
@@ -140,7 +140,7 @@ export default function Navbar() {
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-brand-muted">
                   Quick appointment
                 </p>
-                <a href="tel:+919976658340" className="mt-3 block text-2xl font-black text-brand-light">
+                <a href="tel:+919976658340" className="mt-3 block text-2xl font-black text-brand-light transition-all duration-300 hover:text-brand-gold">
                   +91 99766 58340
                 </a>
                 <Link href="/booking" className="btn-gold mt-5 w-full">

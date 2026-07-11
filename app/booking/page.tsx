@@ -89,7 +89,7 @@ export default function BookingPage() {
               />
             </svg>
           </div>
-          <h2 className="text-3xl font-display font-bold mb-4">Appointment Booked!</h2>
+          <h2 className="text-3xl font-display font-bold mb-4 tracking-tight leading-snug">Appointment Booked!</h2>
           <div className="glass-card p-6 rounded-2xl mb-8 text-left space-y-3">
             <div className="flex justify-between">
               <span className="text-brand-muted">Doctor</span>
@@ -120,7 +120,7 @@ export default function BookingPage() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <div className="gold-line mx-auto" />
-          <h1 className="section-title text-4xl md:text-5xl">Book Your Appointment</h1>
+          <h1 className="section-title text-4xl md:text-5xl tracking-tight leading-snug">Book Your Appointment</h1>
           <p className="section-subtitle mx-auto mt-4">Schedule your visit in just a few steps</p>
         </div>
 
@@ -165,7 +165,7 @@ export default function BookingPage() {
             {/* Step 1: Select Doctor */}
             {currentStep === 1 && (
               <div>
-                <h2 className="text-xl font-display font-bold mb-6">Choose Your Doctor</h2>
+                <h2 className="text-xl font-display font-bold mb-6 tracking-tight leading-snug">Choose Your Doctor</h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   {doctors.map((doc) => (
                     <button
@@ -191,7 +191,7 @@ export default function BookingPage() {
             {/* Step 2: Date & Time */}
             {currentStep === 2 && (
               <div>
-                <h2 className="text-xl font-display font-bold mb-6">Select Date & Time</h2>
+                <h2 className="text-xl font-display font-bold mb-6 tracking-tight leading-snug">Select Date & Time</h2>
                 <div className="mb-8">
                   <label className="block text-sm text-brand-muted mb-2">Preferred Date</label>
                   <input
@@ -226,7 +226,7 @@ export default function BookingPage() {
             {/* Step 3: Patient Details */}
             {currentStep === 3 && (
               <div>
-                <h2 className="text-xl font-display font-bold mb-6">Your Details</h2>
+                <h2 className="text-xl font-display font-bold mb-6 tracking-tight leading-snug">Your Details</h2>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm text-brand-muted mb-2">Full Name *</label>
@@ -275,7 +275,7 @@ export default function BookingPage() {
             {/* Step 4: Confirmation */}
             {currentStep === 4 && (
               <div>
-                <h2 className="text-xl font-display font-bold mb-6">Confirm Your Appointment</h2>
+                <h2 className="text-xl font-display font-bold mb-6 tracking-tight leading-snug">Confirm Your Appointment</h2>
                 <div className="glass-card p-6 md:p-8 rounded-2xl space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-white/5">
                     <span className="text-brand-muted">Doctor</span>

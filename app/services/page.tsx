@@ -45,7 +45,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="gold-line mx-auto" />
-            <h1 className="section-title text-5xl md:text-6xl">Our Services</h1>
+            <h1 className="section-title text-5xl md:text-6xl tracking-tight leading-snug">Our Services</h1>
             <p className="section-subtitle mx-auto mt-4">Comprehensive dental care for every need</p>
           </motion.div>
         </div>

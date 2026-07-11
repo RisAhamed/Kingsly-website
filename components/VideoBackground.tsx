@@ -54,7 +54,7 @@ export default function VideoBackground({
       )}
 
       {/* Gradient overlay */}
-      {overlay && <div className="video-overlay" />}
+      {overlay && <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 to-black/20" />}
     </div>
   );
 }

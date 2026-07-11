@@ -124,7 +124,19 @@ export const services = [
   {
     id: 1,
     title: "Cosmetic Dentistry",
-    icon: "CO",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c-3 0-5.5 1.5-7 4" />
+        <path d="M5 7c-1 2-1.5 4-1 6" />
+        <path d="M12 3c3 0 5.5 1.5 7 4" />
+        <path d="M19 7c1 2 1.5 4 1 6" />
+        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
+        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
+        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
+        <path d="M12 3v2" />
+        <path d="M10 11.5l1 1 2-2" />
+      </svg>
+    ),
     description: "Transform your smile with advanced cosmetic treatments including veneers, bonding, and teeth whitening.",
     doctors: ["dr-c-kingston", "dr-janlyn-kingston"],
     category: "Cosmetic",
@@ -132,7 +144,21 @@ export const services = [
   {
     id: 2,
     title: "Root Canal Therapy",
-    icon: "RC",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4s5-2 6-4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 3v7" />
+        <path d="M8 12h8" />
+        <path d="M10 8l-2 4" />
+        <path d="M14 8l2 4" />
+        <path d="M9.5 17l.5-4" />
+        <path d="M14.5 17l-.5-4" />
+      </svg>
+    ),
     description: "Expert endodontic treatment to save damaged teeth and eliminate pain with precision and care.",
     doctors: ["dr-c-kingston"],
     category: "Cosmetic",
@@ -140,7 +166,21 @@ export const services = [
   {
     id: 3,
     title: "Orthodontics (Braces)",
-    icon: "OR",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8 3 5.5 5 4.5 8" />
+        <path d="M4.5 8c-1 3-.5 6 1 8.5" />
+        <path d="M5.5 16.5c1 2 3 3.5 6.5 3.5s5.5-1.5 6.5-3.5" />
+        <path d="M19.5 8c1 3 .5 6-1 8.5" />
+        <path d="M19.5 8C18.5 5 16 3 12 3" />
+        <path d="M7 10c0 0 2-2 5-2s5 2 5 2" />
+        <path d="M8 13c0 0 1.5-1 4-1s4 1 4 1" />
+        <path d="M10 16c0 0 1-.5 2-.5s2 .5 2 .5" />
+        <path d="M6 14c0 0 1 1 3 1" />
+        <path d="M18 14c0 0-1 1-3 1" />
+        <path d="M12 3v2" />
+      </svg>
+    ),
     description: "Straighten your teeth with traditional braces, clear aligners, and personalized 3D treatment plans.",
     doctors: ["dr-praveen"],
     category: "Orthodontics",
@@ -148,7 +188,19 @@ export const services = [
   {
     id: 4,
     title: "Pediatric Dentistry",
-    icon: "PD",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 4C9 4 7 5.5 6 8" />
+        <path d="M6 8c-1 2.5-.5 5.5 1 7.5" />
+        <path d="M7 15.5c1 1.5 2.5 2.5 5 2.5s4-1 5-2.5" />
+        <path d="M18 8c1 2.5.5 5.5-1 7.5" />
+        <path d="M18 8C17 5.5 15 4 12 4" />
+        <path d="M8.5 10.5c.5-.5 1.5-1 3.5-1s3 .5 3.5 1" />
+        <path d="M9.5 13c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
+        <circle cx="12" cy="8" r="1" fill="currentColor" opacity="0.4" />
+        <path d="M10 18c.5.5 1.5 1 2 1s1.5-.5 2-1" />
+      </svg>
+    ),
     description: "Gentle, child-friendly dental care for infants, toddlers, children, and adolescents.",
     doctors: ["dr-anand-kasi"],
     category: "Pediatric",
@@ -156,7 +208,21 @@ export const services = [
   {
     id: 5,
     title: "Periodontics (Gum Treatment)",
-    icon: "GU",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M8 12h2" />
+        <path d="M14 12h2" />
+        <path d="M12 10v4" />
+        <path d="M4 16c.5 1 1.5 2 3 2" />
+        <path d="M20 16c-.5 1-1.5 2-3 2" />
+        <path d="M7 10c.5-.5 1.5-1 5-1s4.5.5 5 1" />
+      </svg>
+    ),
     description: "Comprehensive gum disease treatment including grafting, crown lengthening, and laser therapy.",
     doctors: ["dr-aravind-v"],
     category: "Periodontics",
@@ -164,7 +230,22 @@ export const services = [
   {
     id: 6,
     title: "Dental Implants",
-    icon: "IM",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 22v-6" />
+        <path d="M12 12v-2" />
+        <path d="M10 14h4" />
+        <path d="M11 12l-1 2" />
+        <path d="M13 12l1 2" />
+        <rect x="10" y="4" width="4" height="3" rx="1" />
+        <line x1="12" y1="7" x2="12" y2="9" />
+      </svg>
+    ),
     description: "Permanent tooth replacement with state-of-the-art implant technology for natural-looking results.",
     doctors: ["dr-sethuraman", "dr-aravind-v"],
     category: "Implants",
@@ -172,7 +253,21 @@ export const services = [
   {
     id: 7,
     title: "Prosthodontics",
-    icon: "PR",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M9 11h6" />
+        <path d="M10 14h4" />
+        <path d="M12 8v6" />
+        <path d="M7 9l2 5" />
+        <path d="M17 9l-2 5" />
+        <path d="M10 18c.5.5 1.5 1 2 1s1.5-.5 2-1" />
+      </svg>
+    ),
     description: "Custom-crafted dental prostheses, crowns, bridges, and dentures using 3D printing technology.",
     doctors: ["dr-sethuraman", "dr-janlyn-kingston"],
     category: "Implants",
@@ -180,7 +275,21 @@ export const services = [
   {
     id: 8,
     title: "Preventive Care & Scaling",
-    icon: "PC",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v4" />
+        <path d="M12 14v1" />
+        <path d="M9 11l3-3 3 3" />
+        <path d="M7 8l1 1" />
+        <path d="M17 8l-1 1" />
+        <path d="M8.5 19c.5.5 1.5 1 3.5 1s3-.5 3.5-1" />
+      </svg>
+    ),
     description: "Professional teeth cleaning, scaling, polishing, and preventive treatments for optimal oral health.",
     doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
     category: "General",
@@ -188,7 +297,19 @@ export const services = [
   {
     id: 9,
     title: "Tooth Extraction",
-    icon: "EX",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v6" />
+        <path d="M9 10l6 6" />
+        <path d="M15 10l-6 6" />
+        <path d="M9.5 18c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
+      </svg>
+    ),
     description: "Safe and comfortable tooth removal for severely decayed or damaged teeth by experienced professionals.",
     doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
     category: "General",

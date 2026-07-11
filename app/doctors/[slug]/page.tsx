@@ -105,7 +105,7 @@ export default function DoctorProfilePage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-4">{doctor.name}</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-tight leading-snug">{doctor.name}</h1>
             <p className="text-xl text-brand-gold mb-6">{doctor.title}</p>
             <div className="flex flex-wrap gap-2 mb-6">
               {doctor.specialties.map((s, i) => (
@@ -157,7 +157,7 @@ export default function DoctorProfilePage() {
       {/* Specialties */}
       <section ref={specialtiesRef} className="max-w-4xl mx-auto px-6 mb-16">
         <div className="gold-line" />
-        <h2 className="text-2xl font-display font-bold mb-6">Specialties</h2>
+        <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">Specialties</h2>
         <div className="flex flex-wrap gap-3">
           {doctor.specialties.map((s, i) => (
             <span key={i} className="spec-pill pill text-base px-5 py-2">{s}</span>
@@ -168,7 +168,7 @@ export default function DoctorProfilePage() {
       {/* About */}
       <section className="max-w-4xl mx-auto px-6 mb-16">
         <div className="gold-line" />
-        <h2 className="text-2xl font-display font-bold mb-6">About</h2>
+        <h2 className="text-2xl font-display font-bold mb-6 tracking-tight leading-snug">About</h2>
         <div className="space-y-5">
           {paragraphs.map((p, i) => (
             <p key={i} className="text-lg leading-relaxed text-brand-light/80">{p}</p>
@@ -180,7 +180,7 @@ export default function DoctorProfilePage() {
       {doctor.education && doctor.education.length > 0 && (
         <section ref={timelineRef} className="max-w-4xl mx-auto px-6 mb-16">
           <div className="gold-line" />
-          <h2 className="text-2xl font-display font-bold mb-8">Education</h2>
+          <h2 className="text-2xl font-display font-bold mb-8 tracking-tight leading-snug">Education</h2>
           <div className="relative pl-8">
             {/* Timeline line */}
             <div
@@ -207,7 +207,7 @@ export default function DoctorProfilePage() {
       {/* CTA */}
       <section ref={ctaRef} className="max-w-4xl mx-auto px-6 py-16 text-center">
         <div className="glass-card p-12 rounded-2xl">
-          <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 tracking-tight leading-snug">
             Book an Appointment with {doctor.name}
           </h2>
           <p className="text-brand-muted mb-8">

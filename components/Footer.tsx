@@ -32,7 +32,7 @@ export default function Footer() {
             Specialist-led dental care with a focus on sterilization, comfort, restorative precision, and accessible treatment.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="tel:+919976658340" className="btn-gold">
+            <a href="tel:+919976658340" className="btn-gold transition-all duration-300">
               Call Clinic
             </a>
             <Link href="/booking" className="btn-outline">
@@ -74,11 +74,11 @@ export default function Footer() {
 
         <div>
           <h3 className="text-sm font-black uppercase tracking-[0.18em] text-brand-gold-dark">Clinic Hours</h3>
-          <div className="mt-5 space-y-3">
+          <div className="mt-5 space-y-1">
             {HOURS.map(([day, time]) => (
-              <div key={day} className="grid grid-cols-[6.5rem_1fr] gap-3 rounded-2xl bg-brand-primary px-4 py-3 text-sm">
+              <div key={day} className="flex justify-between items-center w-full border-b border-gray-200 py-2 text-sm">
                 <span className="font-black text-brand-light">{day}</span>
-                <span className="text-brand-muted">{time}</span>
+                <span className="text-brand-muted text-right">{time}</span>
               </div>
             ))}
           </div>
