@@ -1,10 +1,8 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
+import VideoBackground from '@/components/VideoBackground'
 import { facilityImages } from '@/lib/doctors'
 
 const whyChooseUs = [
@@ -51,65 +49,33 @@ const whyChooseUs = [
   },
 ]
 
+const whyStagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+}
+
+const whyCardItem = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+}
+
 export default function AboutPage() {
-  const heroImgRef = useRef<HTMLDivElement>(null)
-  const facilitiesRef = useRef<HTMLDivElement>(null)
-  const whyRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
-    gsap.registerPlugin(ScrollTrigger)
-
-    // Parallax hero image
-    if (heroImgRef.current) {
-      gsap.to(heroImgRef.current, {
-        y: 100,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroImgRef.current.parentElement,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      })
-    }
-
-    // Facilities grid stagger
-    if (facilitiesRef.current) {
-      const items = facilitiesRef.current.querySelectorAll('.facility-item')
-      gsap.from(items, {
-        y: 50, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: facilitiesRef.current, start: 'top 80%' },
-      })
-    }
-
-    // Why choose us stagger
-    if (whyRef.current) {
-      const cards = whyRef.current.querySelectorAll('.why-card')
-      gsap.from(cards, {
-        y: 50, opacity: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out',
-        scrollTrigger: { trigger: whyRef.current, start: 'top 80%' },
-      })
-    }
-
-    return () => { ScrollTrigger.getAll().forEach(t => t.kill()) }
-  }, [])
-
   return (
     <>
-      {/* Hero with parallax */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div ref={heroImgRef} className="absolute inset-0 -top-20 -bottom-20">
-          <Image
-            src="/images/clinicouterlook.png"
-            alt="Kingslyn Dental Care Clinic"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-brand-primary/70" />
+      {/* Hero with video */}
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <VideoBackground src="/videos/About Us page hero background.mp4" overlay={true} />
         <motion.div
           className="relative z-10 text-center px-6"
           initial={{ y: 40, opacity: 0 }}
@@ -117,16 +83,16 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="gold-line mx-auto" />
-          <h1 className="section-title text-5xl md:text-6xl"><span className="text-accent-italic">About</span> Kingslyn Dental Care</h1>
-          <p className="section-subtitle mx-auto mt-4">Where your smile is our priority since 2007</p>
+          <h1 className="section-title hero-text-shield text-white"><span className="text-accent-italic">About</span> Kingslyn Dental Care</h1>
+          <p className="section-subtitle hero-text-shield mx-auto mt-4 !text-white/80">Where your smile is our priority since 2007</p>
         </motion.div>
       </section>
 
       {/* Our Story */}
       <section className="max-w-4xl mx-auto px-6 py-20">
         <div className="gold-line" />
-        <h2 className="text-3xl font-display font-bold mb-8 tracking-[-0.02em] leading-[0.98]">Our <span className="text-accent-italic">Story</span></h2>
-        <div className="space-y-6 text-lg leading-relaxed text-brand-light/80">
+        <h2 className="section-title">Our <span className="text-accent-italic">Story</span></h2>
+        <div className="space-y-6 text-lg leading-relaxed text-brand-light/80 mt-8">
           <p>
             Founded in 2007 by Dr. C. Kingston, Kingslyn Dental Care was born from a simple yet powerful vision:
             to provide world-class dental care with an unwavering commitment to proper sterilization and patient safety.
@@ -156,10 +122,10 @@ export default function AboutPage() {
           <h2 className="section-title">Our <span className="text-accent-italic">Facilities</span></h2>
           <p className="section-subtitle mx-auto">Modern spaces designed for your comfort and care</p>
         </div>
-        <div ref={facilitiesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {facilityImages.map((img, i) => (
-            <div key={i} className="facility-item relative rounded-2xl overflow-hidden group cursor-pointer">
-              <div className="aspect-[4/3] relative">
+            <div key={i} className="relative rounded-2xl overflow-hidden group cursor-pointer">
+              <div className="aspect-[16/9] relative">
                 <Image
                   src={img.src}
                   alt={img.alt}
@@ -180,20 +146,30 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <div className="text-center mb-12">
           <div className="gold-line mx-auto" />
-          <h2 className="section-title">Why <span className="text-accent-italic">Choose</span> Us</h2>
+          <h2 className="section-title">Why Choose <span className="text-accent-italic">Us</span></h2>
           <p className="section-subtitle mx-auto">What makes Kingslyn Dental Care the right choice</p>
         </div>
-        <div ref={whyRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          variants={whyStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
           {whyChooseUs.map((item, i) => (
-            <div key={i} className="why-card glass-card p-8 rounded-2xl text-center group">
-              <div className="w-16 h-16 rounded-full bg-brand-gold/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-brand-gold/20 transition-colors">
+            <motion.div
+              key={i}
+              variants={whyCardItem}
+              className="why-card glass-card p-6 md:p-8 flex flex-col gap-4 min-h-[220px] text-center group"
+            >
+              <div className="w-16 h-16 rounded-full bg-brand-gold/10 flex items-center justify-center mx-auto group-hover:bg-brand-gold/20 transition-colors flex-shrink-0">
                 {item.icon}
               </div>
-              <h3 className="text-lg font-display font-bold mb-3">{item.title}</h3>
+              <h3 className="text-lg font-display font-bold">{item.title}</h3>
               <p className="text-brand-muted text-sm leading-relaxed">{item.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
     </>
   )

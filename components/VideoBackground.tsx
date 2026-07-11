@@ -27,12 +27,12 @@ export default function VideoBackground({
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Fallback gradient — always rendered behind the video */}
+      {/* Fallback gradient — always rendered behind the video, guaranteed dark */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(135deg, #0a0e17 0%, #111827 50%, #0a0e17 100%)',
+            'linear-gradient(180deg, #02141a 0%, #0a3341 100%)',
         }}
       />
 

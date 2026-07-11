@@ -23,7 +23,6 @@ export default function DoctorProfilePage() {
   const params = useParams()
   const slug = params?.slug as string
   const doctor = doctors.find(d => d.slug === slug)
-  const specialtiesRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
   const timelineLineRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
@@ -34,15 +33,6 @@ export default function DoctorProfilePage() {
     if (prefersReducedMotion) return
 
     gsap.registerPlugin(ScrollTrigger)
-
-    // Specialties stagger
-    if (specialtiesRef.current) {
-      const pills = specialtiesRef.current.querySelectorAll('.spec-pill')
-      gsap.from(pills, {
-        y: 20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: specialtiesRef.current, start: 'top 85%' },
-      })
-    }
 
     // Education timeline line draw
     if (timelineLineRef.current && timelineRef.current) {
@@ -156,17 +146,6 @@ export default function DoctorProfilePage() {
               />
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Specialties */}
-      <section ref={specialtiesRef} className="max-w-4xl mx-auto px-6 mb-16">
-        <div className="gold-line" />
-        <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]"><span className="text-accent-italic">Specialties</span></h2>
-        <div className="flex flex-wrap gap-3">
-          {doctor.specialties.map((s, i) => (
-            <span key={i} className="spec-pill pill text-base px-5 py-2">{s}</span>
-          ))}
         </div>
       </section>
 

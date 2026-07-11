@@ -7,6 +7,15 @@ import { doctors, filterCategories } from '@/lib/doctors';
 import DoctorCard from '@/components/DoctorCard';
 import VideoBackground from '@/components/VideoBackground';
 
+const pillStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
+};
+const pillItem = {
+  hidden: { opacity: 0, y: 20, scale: 0.85 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
 export default function DoctorsPage() {
   const [activeFilter, setActiveFilter] = useState('All');
   const headerRef = useRef<HTMLDivElement>(null);
@@ -28,22 +37,7 @@ export default function DoctorsPage() {
     return () => ctx.revert();
   }, []);
 
-  /* ── GSAP stagger for filter pills ── */
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('[data-pill]', {
-        opacity: 0,
-        y: 20,
-        scale: 0.85,
-        duration: 0.6,
-        stagger: 0.07,
-        ease: 'back.out(1.7)',
-        delay: 0.8,
-      });
-    }, pillsRef);
-
-    return () => ctx.revert();
-  }, []);
+  /* Filter pills now use Framer Motion staggerChildren (see JSX below) */
 
   /* ── Filter logic ── */
   const filteredDoctors =
@@ -61,12 +55,12 @@ export default function DoctorsPage() {
           ref={headerRef}
           className="relative z-10 text-center px-6 py-28 max-w-3xl mx-auto"
         >
-          <h1 data-header-anim className="section-title">
+          <h1 data-header-anim className="section-title hero-text-shield text-white">
             Our <span className="text-accent-italic">Expert</span> Team
           </h1>
           <p
             data-header-anim
-            className="section-subtitle mx-auto mt-4"
+            className="section-subtitle hero-text-shield mx-auto mt-4 !text-white/80"
           >
             World-class dental specialists dedicated to crafting your perfect
             smile with precision, compassion, and cutting-edge technology.
@@ -81,28 +75,31 @@ export default function DoctorsPage() {
           className="absolute inset-x-0 -top-24 h-24 pointer-events-none"
           style={{
             background:
-              'linear-gradient(to top, #0a0e17 0%, transparent 100%)',
+              'linear-gradient(to top, var(--color-primary) 0%, transparent 100%)',
           }}
         />
 
         {/* Filter pills */}
-        <div
+        <motion.div
           ref={pillsRef}
+          variants={pillStagger}
+          initial="hidden"
+          animate="show"
           className="flex flex-wrap justify-center gap-3 mb-14 max-w-4xl mx-auto"
         >
           {filterCategories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
-              data-pill
+              variants={pillItem}
               onClick={() => setActiveFilter(cat)}
               className={`pill cursor-pointer transition-all duration-300 ${
                 activeFilter === cat ? 'pill-active' : ''
               }`}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Doctors grid */}
         <div className="max-w-7xl mx-auto">

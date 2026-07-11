@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 import VideoBackground from '@/components/VideoBackground'
 import MagneticButton from '@/components/MagneticButton'
@@ -14,25 +12,13 @@ function getDoctorName(slug: string): string {
   return doc ? doc.name : slug
 }
 
+const accordionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0 },
+}
+
 export default function ServicesPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const accordionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
-    gsap.registerPlugin(ScrollTrigger)
-
-    if (accordionRef.current) {
-      const items = accordionRef.current.querySelectorAll('.accordion-item')
-      gsap.from(items, {
-        y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: accordionRef.current, start: 'top 80%' },
-      })
-    }
-
-    return () => { ScrollTrigger.getAll().forEach(t => t.kill()) }
-  }, [])
 
   return (
     <>
@@ -46,17 +32,25 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="gold-line mx-auto" />
-            <h1 className="section-title text-5xl md:text-6xl">Our <span className="text-accent-italic">Services</span></h1>
-            <p className="section-subtitle mx-auto mt-4">Comprehensive dental care for every need</p>
+            <h1 className="section-title hero-text-shield text-white">Our <span className="text-accent-italic">Services</span></h1>
+            <p className="section-subtitle hero-text-shield mx-auto mt-4 !text-white/80">Comprehensive dental care for every need</p>
           </motion.div>
         </div>
       </section>
 
       {/* Accordion Section */}
-      <section ref={accordionRef} className="max-w-4xl mx-auto px-6 py-20">
+      <section className="max-w-4xl mx-auto px-6 py-20">
         <div className="space-y-4">
           {services.map((service, i) => (
-            <div key={service.id} className="accordion-item glass-card rounded-2xl overflow-hidden">
+            <motion.div
+              key={service.id}
+              variants={accordionVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.55, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="service-accordion-item glass-card rounded-2xl overflow-hidden"
+            >
               {/* Header */}
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -89,8 +83,8 @@ export default function ServicesPage() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0">
-                      <div className="border-t border-white/5 pt-6">
-                        <p className="text-brand-light/80 leading-relaxed mb-6">{service.description}</p>
+                      <div className="border-t border-brand-border pt-6">
+                        <p className="text-brand-muted leading-relaxed mb-6">{service.description}</p>
                         <div>
                           <span className="text-sm text-brand-muted">Handled by: </span>
                           <div className="flex flex-wrap gap-2 mt-2">
@@ -110,7 +104,7 @@ export default function ServicesPage() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

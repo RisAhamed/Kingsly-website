@@ -105,6 +105,15 @@
     @apply italic font-light text-brand-warm-accent;
   }
 
+  .dot-grid-bg {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .hero-text-shield {
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.6);
+  }
+
   .text-hero {
     font-size: clamp(3.6rem, 10vw, 8rem);
     line-height: 0.95;

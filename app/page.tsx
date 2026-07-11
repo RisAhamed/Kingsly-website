@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import DoctorCard from '@/components/DoctorCard';
 import ServiceCard from '@/components/ServiceCard';
 import VideoBackground from '@/components/VideoBackground';
@@ -13,10 +14,10 @@ import MagneticButton from '@/components/MagneticButton';
 import { clinicInfo, doctors, facilityImages, services } from '@/lib/doctors';
 
 const stats = [
-  { value: '7', label: 'Specialist doctors' },
-  { value: '17+', label: 'Years of clinical leadership' },
-  { value: '9', label: 'Core dental service lines' },
-  { value: '100%', label: 'Sterilization-first protocols' },
+  { value: '7', label: 'Specialist Doctors' },
+  { value: '17+', label: 'Years Experience' },
+  { value: '9', label: 'Core Treatments' },
+  { value: '100%', label: 'Sterilized Care' },
 ];
 
 const testimonials = [
@@ -40,26 +41,29 @@ const fadeUp = {
 };
 
 export default function HomePage() {
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !heroRef.current) return;
+    if (prefersReducedMotion) return;
+
+    gsap.set('.hero-headline', { opacity: 1, y: 0 });
 
     gsap.to('.hero-video-bg', {
       yPercent: 20,
       ease: 'none',
-      scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+      scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'bottom top', scrub: true },
     });
     gsap.to('.hero-headline', {
-      yPercent: -40,
-      opacity: 0.3,
+      yPercent: -30,
+      opacity: 0.55,
       ease: 'none',
-      scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+      scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'bottom top', scrub: true },
     });
-
-    return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
+    gsap.to('.hero-dot-grid', {
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'center top', scrub: true },
+    });
   }, []);
 
   useEffect(() => {
@@ -92,24 +96,25 @@ export default function HomePage() {
 
   return (
     <div className="noise-overlay page-shell">
-      <section ref={heroRef} className="hero-section relative isolate flex min-h-[100dvh] items-center overflow-hidden px-6 pb-16 pt-28">
+      <section className="hero-section relative isolate flex min-h-[100dvh] items-center overflow-hidden px-6 pb-16 pt-28">
         <div className="hero-video-bg absolute inset-0">
           <VideoBackground src="/videos/hero-bg.mp4" />
         </div>
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#063947]/90 via-[#063947]/62 to-[#063947]/20" />
+        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#02141a]/75 via-[#02141a]/55 to-[#02141a]/35" />
+        <div className="dot-grid-bg absolute inset-0 z-[3] hero-dot-grid" />
 
         <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }}>
             <motion.span variants={fadeUp} className="section-kicker !text-white/80">
               Kingslyn Dental Care
             </motion.span>
-            <motion.h1 variants={fadeUp} className="hero-headline text-hero font-display font-black tracking-normal text-white">
+            <h1 className="hero-headline hero-text-shield text-hero font-display font-black tracking-normal text-white">
               Your Smile, Our Priority
-            </motion.h1>
-            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-hero-sub font-medium text-cyan-50/86">
+            </h1>
+            <p className="hero-text-shield mt-6 max-w-2xl text-hero-sub font-medium text-white">
               {clinicInfo.subTagline}. Specialist-led dentistry with precise treatment planning, strict sterilization,
               and calm patient care.
-            </motion.p>
+            </p>
             <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-4 sm:flex-row">
               <MagneticButton>
                 <Link href="/contact" className="btn-gold !bg-white !text-brand-light hover:!bg-cyan-50">
@@ -149,7 +154,7 @@ export default function HomePage() {
       </section>
 
       <section className="px-6 py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -158,10 +163,14 @@ export default function HomePage() {
               whileInView="show"
               viewport={{ once: true, margin: '-80px' }}
               transition={{ delay: index * 0.06, duration: 0.55 }}
-              className="surface-card p-7"
+              className="flex flex-col items-start gap-2 p-6 rounded-2xl bg-[rgba(255,255,255,0.6)] backdrop-blur-sm border border-brand-border"
             >
-              <p className="stat-number">{stat.value}</p>
-              <p className="mt-3 font-bold leading-6 text-brand-muted">{stat.label}</p>
+              <span className="stat-number font-display text-[clamp(2.8rem,6vw,5rem)] font-black text-brand-gold leading-none">
+                {stat.value}
+              </span>
+              <span className="text-[13px] font-semibold uppercase tracking-[0.15em] text-brand-muted leading-tight max-w-[140px]">
+                {stat.label}
+              </span>
             </motion.div>
           ))}
         </div>
@@ -224,21 +233,25 @@ export default function HomePage() {
               Step Inside
             </Link>
           </div>
-          <div className="grid gap-5 md:grid-cols-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {facilityImages.slice(0, 6).map((item, index) => (
               <motion.div
                 key={item.src}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ delay: index * 0.04, duration: 0.5 }}
-                className={`surface-card p-2 ${index === 0 || index === 5 ? 'md:col-span-2' : ''}`}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="relative aspect-[3/4] overflow-hidden rounded-2xl group"
               >
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[1.55rem]">
-                  <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-                  <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/90 px-4 py-3 text-sm font-black text-brand-light">
-                    {item.caption}
-                  </div>
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-4">
+                  <span className="text-white text-sm font-semibold">{item.caption}</span>
                 </div>
               </motion.div>
             ))}
@@ -267,15 +280,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden px-6 py-20 md:py-28">
-        <div className="absolute inset-0 opacity-20">
-          <VideoBackground src="/videos/cta-bg.mp4" overlay={false} />
-          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 to-black/20" />
+      <section className="relative overflow-hidden bg-brand-light px-6 py-20 md:py-28 text-white">
+        <div className="absolute inset-0 opacity-45">
+          <VideoBackground src="/videos/cta-bg.mp4" overlay={true} />
         </div>
-        <div className="relative mx-auto max-w-5xl text-center">
-          <span className="section-kicker">Get in touch</span>
-          <h2 className="section-title">Your next appointment <span className="text-accent-italic">starts here</span>.</h2>
-          <p className="section-subtitle mx-auto mt-5">
+        <div className="relative z-10 mx-auto max-w-5xl text-center">
+          <span className="section-kicker !text-cyan-100/80">Get in touch</span>
+          <h2 className="section-title text-white hero-text-shield">Your next appointment <span className="text-accent-italic">starts here</span>.</h2>
+          <p className="section-subtitle mx-auto mt-5 !text-white/80 hero-text-shield">
             Call the clinic or message us online. The team will help match your concern with the right doctor.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
@@ -284,7 +296,7 @@ export default function HomePage() {
                 Contact Us
               </Link>
             </MagneticButton>
-            <a href={clinicInfo.phoneLink} className="btn-outline">
+            <a href={clinicInfo.phoneLink} className="btn-outline !border-white/25 !bg-white/10 !text-white hover:!bg-white/18">
               {clinicInfo.phone}
             </a>
           </div>
