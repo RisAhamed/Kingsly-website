@@ -9,6 +9,7 @@ export interface Doctor {
   experience?: string;
   education?: { institution: string; degree: string; year?: string }[];
   bio: string;
+  quote?: string;
   filterTags: string[];
 }
 
@@ -18,7 +19,7 @@ export const doctors: Doctor[] = [
     name: "Dr. C. Kingston",
     slug: "dr-c-kingston",
     image: "/images/Dr. C. Kingston.png",
-    title: "Kingslyn Dental Care | Expert Cosmetic Dentistry",
+    title: "Founder & Chief Dental Surgeon",
     languages: ["Hindi", "English"],
     specialties: [
       "Restorative Dental Treatments",
@@ -42,7 +43,8 @@ export const doctors: Doctor[] = [
         degree: "Ph.D (in progress)",
       },
     ],
-    bio: "Introducing Dr. C. Kingston, Your Trusted Dental Care Partner at Kingslyn Dental Care! Dr. C. Kingston is a highly experienced and dedicated dental professional, committed to providing exceptional care to his patients. He obtained his Bachelor's in Dental Surgery (BDS) from Balaji Dental College and Hospital, Chennai, graduating in 2007. Following his passion for dentistry, he pursued further studies and completed his Master's in Dental Surgery (MDS) from Rajas Dental College and Hospital, Tirunelveli, in 2015. Currently, he is pursuing a PhD at SRM University, Chennai, to further enhance his expertise in the field. Dr. Kingston's motivation to start Kingslyn Dental Care was to offer quality dental services with a strong emphasis on proper sterilization of instruments, ensuring a safe and hygienic environment for all patients. He understands the importance of affordable dental care and strives to make his services accessible to all. With a remarkable 17 years of experience as a General Dentist and an additional 9 years specializing in Endodontics, Dr. Kingston has gained extensive knowledge and skills in various aspects of dentistry. His areas of expertise include restorative dentistry, esthetic dentistry, and endodontics. Dr. Kingston's passion lies in restoring smiles and enhancing the aesthetic appeal of his patients' teeth, while also ensuring their oral health and well-being. At Kingslyn Dental Care, Dr. Kingston and his team are dedicated to providing personalized and comprehensive dental care to each patient. Whether you require a routine check-up, a cosmetic procedure, or specialized treatment, Dr. Kingston is here to help you achieve a healthy and beautiful smile. Trust your dental health to Dr. C. Kingston at Kingslyn Dental Care, where your smile is our priority.",
+    quote: "Excellence in dentistry is not just about treating teeth; it's about restoring confidence and changing lives with compassion and precision.",
+    bio: "As the visionary founder and principal surgeon of Kingslyn Dental Care, Dr. C. Kingston has dedicated his life to redefining the standards of modern dentistry. He is a highly experienced and deeply committed dental professional, leading his clinic with a philosophy of uncompromised care and precision. He obtained his Bachelor's in Dental Surgery (BDS) from Balaji Dental College and Hospital, Chennai, graduating in 2007. Driven by a relentless passion for dentistry, he completed his Master's in Dental Surgery (MDS) from Rajas Dental College and Hospital, Tirunelveli, in 2015. Currently, he is pursuing a PhD at SRM University, Chennai, pushing the boundaries of endodontic research. Dr. Kingston's core motivation to establish Kingslyn Dental Care was to offer premium, world-class dental services with an absolute, non-negotiable emphasis on sterilization, ensuring a perfectly safe and hygienic environment. With a remarkable 17 years of experience as a General Dentist and an additional 9 years specializing as an Endodontist, Dr. Kingston has mastered the art and science of dentistry. His elite expertise spans restorative dentistry, complex esthetic makeovers, and painless root canal therapies. Dr. Kingston's true passion lies in architecting perfect smiles and elevating the aesthetic appeal of his patients' teeth, while profoundly improving their overall well-being. Under his leadership, the entire team at Kingslyn Dental Care is inspired to deliver personalized, comprehensive, and compassionate care. Trust your smile to the expert hands of Dr. C. Kingston, where visionary leadership meets exceptional dental care.",
     filterTags: ["Cosmetic", "General"],
   },
   {
@@ -123,26 +125,6 @@ export const doctors: Doctor[] = [
 export const services = [
   {
     id: 1,
-    title: "Cosmetic Dentistry",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3c-3 0-5.5 1.5-7 4" />
-        <path d="M5 7c-1 2-1.5 4-1 6" />
-        <path d="M12 3c3 0 5.5 1.5 7 4" />
-        <path d="M19 7c1 2 1.5 4 1 6" />
-        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
-        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
-        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
-        <path d="M12 3v2" />
-        <path d="M10 11.5l1 1 2-2" />
-      </svg>
-    ),
-    description: "Transform your smile with advanced cosmetic treatments including veneers, bonding, and teeth whitening.",
-    doctors: ["dr-c-kingston", "dr-janlyn-kingston"],
-    category: "Cosmetic",
-  },
-  {
-    id: 2,
     title: "Root Canal Therapy",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -159,13 +141,79 @@ export const services = [
         <path d="M14.5 17l-.5-4" />
       </svg>
     ),
-    description: "Expert endodontic treatment to save damaged teeth and eliminate pain with precision and care.",
+    description: "Treats infection at the root of a tooth to save it and eliminate pain with precision.",
     doctors: ["dr-c-kingston"],
-    category: "Cosmetic",
+    category: "Endodontics",
+    images: ["/images/RCT (Root Canal Treatment).png", "/images/Root Canal Treatment.png"],
+  },
+  {
+    id: 2,
+    title: "Dental Cleaning",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v4" />
+        <path d="M12 14v1" />
+        <path d="M9 11l3-3 3 3" />
+        <path d="M7 8l1 1" />
+        <path d="M17 8l-1 1" />
+        <path d="M8.5 19c.5.5 1.5 1 3.5 1s3-.5 3.5-1" />
+      </svg>
+    ),
+    description: "Removes plaque, tartar, and stains to maintain optimal oral hygiene and a bright smile.",
+    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/Scaling (Teeth Cleaning  Teeth Whitening).png", "/images/Regular Dental Check Ups.png"],
   },
   {
     id: 3,
-    title: "Orthodontics (Braces)",
+    title: "Tooth Fillings & Sealants",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c-3 0-5.5 1.5-7 4" />
+        <path d="M5 7c-1 2-1.5 4-1 6" />
+        <path d="M12 3c3 0 5.5 1.5 7 4" />
+        <path d="M19 7c1 2 1.5 4 1 6" />
+        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
+        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
+        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
+        <path d="M12 3v2" />
+        <path d="M10 11.5l1 1 2-2" />
+      </svg>
+    ),
+    description: "Restores decayed or damaged teeth seamlessly using high-quality tooth-colored fillings.",
+    doctors: ["dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/Light Cure Restorations (Tooth Coloured Fillings).png", "/images/Restorations (Tooth Fillings).png"],
+  },
+  {
+    id: 4,
+    title: "Tooth Extraction & Oral Surgery",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v6" />
+        <path d="M9 10l6 6" />
+        <path d="M15 10l-6 6" />
+        <path d="M9.5 18c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
+      </svg>
+    ),
+    description: "Safely and painlessly removes damaged, impacted, or problematic teeth.",
+    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/tooth extraction.webp", "/images/Oral surgery.png", "/images/wisdomtoothextraction.png"],
+  },
+  {
+    id: 5,
+    title: "Braces and Aligners",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3C8 3 5.5 5 4.5 8" />
@@ -181,54 +229,34 @@ export const services = [
         <path d="M12 3v2" />
       </svg>
     ),
-    description: "Straighten your teeth with traditional braces, clear aligners, and personalized 3D treatment plans.",
+    description: "Corrects teeth alignment and bite issues with traditional braces or invisible clear aligners.",
     doctors: ["dr-praveen"],
     category: "Orthodontics",
-  },
-  {
-    id: 4,
-    title: "Pediatric Dentistry",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 4C9 4 7 5.5 6 8" />
-        <path d="M6 8c-1 2.5-.5 5.5 1 7.5" />
-        <path d="M7 15.5c1 1.5 2.5 2.5 5 2.5s4-1 5-2.5" />
-        <path d="M18 8c1 2.5.5 5.5-1 7.5" />
-        <path d="M18 8C17 5.5 15 4 12 4" />
-        <path d="M8.5 10.5c.5-.5 1.5-1 3.5-1s3 .5 3.5 1" />
-        <path d="M9.5 13c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
-        <circle cx="12" cy="8" r="1" fill="currentColor" opacity="0.4" />
-        <path d="M10 18c.5.5 1.5 1 2 1s1.5-.5 2-1" />
-      </svg>
-    ),
-    description: "Gentle, child-friendly dental care for infants, toddlers, children, and adolescents.",
-    doctors: ["dr-anand-kasi"],
-    category: "Pediatric",
-  },
-  {
-    id: 5,
-    title: "Periodontics (Gum Treatment)",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3C8.5 3 6 5 5 8" />
-        <path d="M5 8c-1 3-.5 6 1 8" />
-        <path d="M6 16c1 2 3 4 6 4" />
-        <path d="M18 8c1 3 .5 6-1 8" />
-        <path d="M19 8C18 5 15.5 3 12 3" />
-        <path d="M8 12h2" />
-        <path d="M14 12h2" />
-        <path d="M12 10v4" />
-        <path d="M4 16c.5 1 1.5 2 3 2" />
-        <path d="M20 16c-.5 1-1.5 2-3 2" />
-        <path d="M7 10c.5-.5 1.5-1 5-1s4.5.5 5 1" />
-      </svg>
-    ),
-    description: "Comprehensive gum disease treatment including grafting, crown lengthening, and laser therapy.",
-    doctors: ["dr-aravind-v"],
-    category: "Periodontics",
+    images: ["/images/Dental Aligners (Invisible Braces  Invisalign).png", "/images/Orthodontic Braces (Ceramic Braces).png"],
   },
   {
     id: 6,
+    title: "Cosmetic Procedures & Bonding",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c-3 0-5.5 1.5-7 4" />
+        <path d="M5 7c-1 2-1.5 4-1 6" />
+        <path d="M12 3c3 0 5.5 1.5 7 4" />
+        <path d="M19 7c1 2 1.5 4 1 6" />
+        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
+        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
+        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
+        <path d="M12 3v2" />
+        <path d="M10 11.5l1 1 2-2" />
+      </svg>
+    ),
+    description: "Transform your smile perfectly with advanced bonding, veneers, and full cosmetic makeovers.",
+    doctors: ["dr-c-kingston", "dr-janlyn-kingston"],
+    category: "Cosmetic",
+    images: ["/images/Cosmetic Dental Treatment.png", "/images/smile makeover.png", "/images/cosmetic dentistry.png"],
+  },
+  {
+    id: 7,
     title: "Dental Implants",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -246,13 +274,14 @@ export const services = [
         <line x1="12" y1="7" x2="12" y2="9" />
       </svg>
     ),
-    description: "Permanent tooth replacement with state-of-the-art implant technology for natural-looking results.",
+    description: "Permanent tooth replacement with state-of-the-art implant technology for a natural look.",
     doctors: ["dr-sethuraman", "dr-aravind-v"],
     category: "Implants",
+    images: ["/images/Dental Implants.png", "/images/dental implants 2.png"],
   },
   {
-    id: 7,
-    title: "Prosthodontics",
+    id: 8,
+    title: "Dentures & Bridges",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3C8.5 3 6 5 5 8" />
@@ -268,13 +297,58 @@ export const services = [
         <path d="M10 18c.5.5 1.5 1 2 1s1.5-.5 2-1" />
       </svg>
     ),
-    description: "Custom-crafted dental prostheses, crowns, bridges, and dentures using 3D printing technology.",
+    description: "Custom-crafted dental prostheses, crowns, bridges, and dentures that fit comfortably.",
     doctors: ["dr-sethuraman", "dr-janlyn-kingston"],
     category: "Implants",
+    images: ["/images/Dentures (Tooth Replacement Fixed Dentures, Removable Dentures, BPS - Full Dentures).png", "/images/Dental Crowns & Bridges.png"],
   },
   {
-    id: 8,
-    title: "Preventive Care & Scaling",
+    id: 9,
+    title: "Pediatric Dentistry",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 4C9 4 7 5.5 6 8" />
+        <path d="M6 8c-1 2.5-.5 5.5 1 7.5" />
+        <path d="M7 15.5c1 1.5 2.5 2.5 5 2.5s4-1 5-2.5" />
+        <path d="M18 8c1 2.5.5 5.5-1 7.5" />
+        <path d="M18 8C17 5.5 15 4 12 4" />
+        <path d="M8.5 10.5c.5-.5 1.5-1 3.5-1s3 .5 3.5 1" />
+        <path d="M9.5 13c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
+        <circle cx="12" cy="8" r="1" fill="currentColor" opacity="0.4" />
+        <path d="M10 18c.5.5 1.5 1 2 1s1.5-.5 2-1" />
+      </svg>
+    ),
+    description: "Gentle, child-friendly dental care specifically tailored for infants, toddlers, and children.",
+    doctors: ["dr-anand-kasi"],
+    category: "Pediatric",
+    images: ["/images/Pediatric Dentistry (Child Care Dentistry).png"],
+  },
+  {
+    id: 10,
+    title: "Periodontics (Gum Treatment)",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M8 12h2" />
+        <path d="M14 12h2" />
+        <path d="M12 10v4" />
+        <path d="M4 16c.5 1 1.5 2 3 2" />
+        <path d="M20 16c-.5 1-1.5 2-3 2" />
+        <path d="M7 10c.5-.5 1.5-1 5-1s4.5.5 5 1" />
+      </svg>
+    ),
+    description: "Comprehensive gum disease treatment including grafting and advanced laser therapy.",
+    doctors: ["dr-aravind-v"],
+    category: "Periodontics",
+    images: ["/images/Flap Surgery (Bleeding Gums Treatment, Gum Recession Treatment).png"],
+  },
+  {
+    id: 11,
+    title: "Mouth Guards & Splints",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3C8.5 3 6 5 5 8" />
@@ -290,30 +364,11 @@ export const services = [
         <path d="M8.5 19c.5.5 1.5 1 3.5 1s3-.5 3.5-1" />
       </svg>
     ),
-    description: "Professional teeth cleaning, scaling, polishing, and preventive treatments for optimal oral health.",
-    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
+    description: "Custom protective mouth guards to prevent injury and treat issues like teeth grinding.",
+    doctors: ["dr-r-snega-latha", "dr-janlyn-kingston"],
     category: "General",
-  },
-  {
-    id: 9,
-    title: "Tooth Extraction",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3C8.5 3 6 5 5 8" />
-        <path d="M5 8c-1 3-.5 6 1 8" />
-        <path d="M6 16c1 2 3 4 6 4" />
-        <path d="M18 8c1 3 .5 6-1 8" />
-        <path d="M19 8C18 5 15.5 3 12 3" />
-        <path d="M12 8v6" />
-        <path d="M9 10l6 6" />
-        <path d="M15 10l-6 6" />
-        <path d="M9.5 18c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
-      </svg>
-    ),
-    description: "Safe and comfortable tooth removal for severely decayed or damaged teeth by experienced professionals.",
-    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
-    category: "General",
-  },
+    images: ["/images/Teeth Splinting.jpg", "/images/Family & General Dentistry.png"],
+  }
 ];
 
 export const clinicInfo = {

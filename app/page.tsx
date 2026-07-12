@@ -103,8 +103,8 @@ export default function HomePage() {
         <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#02141a]/75 via-[#02141a]/55 to-[#02141a]/35" />
         <div className="dot-grid-bg absolute inset-0 z-[3] hero-dot-grid" />
 
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <motion.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }}>
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
+          <motion.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }} className="flex flex-col items-center">
             <motion.span variants={fadeUp} className="section-kicker !text-white/80">
               Kingslyn Dental Care
             </motion.span>
@@ -115,7 +115,7 @@ export default function HomePage() {
               {clinicInfo.subTagline}. Specialist-led dentistry with precise treatment planning, strict sterilization,
               and calm patient care.
             </p>
-            <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-4 sm:flex-row justify-center">
               <MagneticButton>
                 <Link href="/contact" className="btn-gold !bg-white !text-brand-light hover:!bg-cyan-50">
                   Contact Us
@@ -125,30 +125,6 @@ export default function HomePage() {
                 Meet Our Doctors
               </Link>
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
-            className="hidden lg:block"
-          >
-            <div className="rounded-[2.5rem] border border-white/18 bg-white/12 p-2 shadow-[0_34px_110px_rgba(0,0,0,0.28)]">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem]">
-                <Image
-                  src="/images/dentalchair.png"
-                  alt="Modern treatment chair at Kingslyn Dental Care"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="42vw"
-                />
-                <div className="absolute inset-x-5 bottom-5 rounded-[1.5rem] bg-white/92 p-5 text-brand-light shadow-[0_20px_60px_rgba(0,0,0,0.22)]">
-                  <p className="text-sm font-black uppercase tracking-[0.16em] text-brand-gold-dark">Sterile care model</p>
-                  <p className="mt-2 text-xl font-black">Safe instruments. Clear plans. Comfortable visits.</p>
-                </div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -173,6 +149,67 @@ export default function HomePage() {
               </span>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Founder Spotlight Section */}
+      <section className="px-6 py-20 md:py-28 relative overflow-hidden bg-brand-gold/5 border-y border-brand-gold/10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none" />
+        
+        <div className="mx-auto max-w-7xl relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Image */}
+            <motion.div 
+              className="w-full lg:w-5/12 flex-shrink-0"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/10 glow-gold">
+                <Image
+                  src="/images/Dr. C. Kingston.png"
+                  alt="Dr. C. Kingston, Founder"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#02141a]/90 via-[#02141a]/60 to-transparent p-8 pt-24 text-white">
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-brand-gold">Founder & Chief Dental Surgeon</p>
+                  <p className="mt-2 text-2xl font-display font-bold">Dr. C. Kingston</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div 
+              className="w-full lg:w-7/12"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <svg
+                width="48" height="48" viewBox="0 0 24 24" fill="currentColor"
+                className="text-brand-gold/30 mb-8"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium italic text-brand-light leading-snug lg:leading-tight mb-8">
+                &quot;Excellence in dentistry is not just about treating teeth; it&apos;s about restoring confidence and changing lives with compassion and precision.&quot;
+              </h2>
+              <div className="gold-line mb-6" />
+              <p className="text-lg text-brand-muted leading-relaxed mb-8">
+                With over two decades of expertise spanning general dentistry and elite endodontics, Dr. Kingston founded Kingslyn Dental Care with a singular vision: to deliver world-class, painless treatments in an absolutely sterile environment. His visionary leadership sets the standard for every specialist in our clinic.
+              </p>
+              <MagneticButton>
+                <Link href="/doctors/dr-c-kingston" className="btn-outline">
+                  Read Full Profile
+                </Link>
+              </MagneticButton>
+            </motion.div>
+          </div>
         </div>
       </section>
 

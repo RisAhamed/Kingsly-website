@@ -74,6 +74,8 @@ export default function DoctorProfilePage() {
   }
 
   const paragraphs = splitBioIntoParagraphs(doctor.bio)
+  const summary = paragraphs[0]
+  const remainingParagraphs = paragraphs.slice(1)
 
   return (
     <div className="pt-24 pb-16">
@@ -149,12 +151,46 @@ export default function DoctorProfilePage() {
         </div>
       </section>
 
+      {/* Summary Text (Between Hero and About) */}
+      <section className="max-w-4xl mx-auto px-6 mb-12">
+        <p className="text-xl md:text-2xl font-light leading-relaxed text-brand-light/90 text-center md:text-left">
+          {summary}
+        </p>
+      </section>
+
+      {/* Quote Section */}
+      {doctor.quote && (
+        <section className="max-w-5xl mx-auto px-6 mb-16">
+          <motion.div 
+            className="glass-card p-10 md:p-16 rounded-[2.5rem] relative overflow-hidden text-center shadow-lg border border-brand-gold/20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="absolute top-0 left-0 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl -ml-16 -mt-16 pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl -mr-16 -mb-16 pointer-events-none" />
+            
+            <svg
+              width="64" height="64" viewBox="0 0 24 24" fill="currentColor"
+              className="text-brand-gold/20 mx-auto mb-6 relative z-10"
+            >
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-medium italic text-brand-light leading-snug md:leading-snug relative z-10">
+              &quot;{doctor.quote}&quot;
+            </h3>
+          </motion.div>
+        </section>
+      )}
+
       {/* About */}
       <section className="max-w-4xl mx-auto px-6 mb-16">
         <div className="gold-line" />
         <h2 className="text-2xl font-display font-bold mb-6 tracking-[-0.02em] leading-[0.98]"><span className="text-accent-italic">About</span></h2>
         <div className="space-y-5">
-          {paragraphs.map((p, i) => (
+          {remainingParagraphs.map((p, i) => (
             <p key={i} className="text-lg leading-relaxed text-brand-light/80">{p}</p>
           ))}
         </div>

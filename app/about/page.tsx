@@ -88,6 +88,25 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
+      {/* Logo Display */}
+      <section className="pt-20 pb-4 text-center">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="inline-block relative"
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Kingslyn Dental Care Logo"
+            width={300}
+            height={100}
+            className="w-[200px] md:w-[300px] h-auto object-contain mx-auto opacity-90"
+          />
+        </motion.div>
+      </section>
+
       {/* Our Story */}
       <section className="max-w-4xl mx-auto px-6 py-20">
         <div className="gold-line" />

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
+import Link from 'next/link';
 
 interface ServiceCardProps {
   service: {
@@ -45,6 +46,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       animate={{ rotateX: rotate.x, rotateY: rotate.y }}
       className="group relative overflow-hidden rounded-[1.75rem] bg-white p-7 md:p-8 shadow-sm hover:shadow-2xl transition-shadow duration-500"
     >
+      <Link href={`/services#service-${service.id}`} className="absolute inset-0 z-10" aria-label={`Explore ${service.title} treatments`} />
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-secondary text-brand-gold-dark transition-transform duration-300 group-hover:scale-105">
         {service.icon}
       </div>

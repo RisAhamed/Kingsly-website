@@ -1,29 +1,19 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import MagneticButton from '@/components/MagneticButton'
 import VideoBackground from '@/components/VideoBackground'
 import { clinicInfo } from '@/lib/doctors'
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
-  }
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <VideoBackground
-        src="/videos/contact-page.mp4"
-        overlay={true}
-        className="fixed inset-0 -z-10"
-      />
-
+      <div className="absolute inset-0">
+        <VideoBackground
+          src="/videos/contact-page.mp4"
+          overlay={true}
+        />
+      </div>
       <div className="relative z-10 pt-28 pb-20 px-6">
         {/* Hero */}
         <div className="text-center mb-16">
@@ -39,63 +29,20 @@ export default function ContactPage() {
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          {/* Borderless Form */}
+          {/* Quote Section */}
           <motion.div
+            className="flex flex-col justify-center"
             initial={{ x: -40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="gold-line" />
-            <h2 className="section-title text-white hero-text-shield mb-8">Send us a <span className="text-accent-italic">Message</span></h2>
-            {submitted ? (
-              <motion.div
-                className="py-12"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-              >
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 text-2xl font-black text-brand-gold">
-                  OK
-                </div>
-                <h3 className="text-xl font-bold text-brand-gold mb-2">Message Sent!</h3>
-                <p className="text-white/60">We&apos;ll get back to you shortly.</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <input
-                  type="text" required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Your Name"
-                  className="w-full bg-transparent border-b border-white/30 text-white placeholder-white/50 py-3 focus:border-brand-warm-accent outline-none transition-colors text-lg"
-                />
-                <input
-                  type="email" required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="Email Address"
-                  className="w-full bg-transparent border-b border-white/30 text-white placeholder-white/50 py-3 focus:border-brand-warm-accent outline-none transition-colors text-lg"
-                />
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="Phone Number"
-                  className="w-full bg-transparent border-b border-white/30 text-white placeholder-white/50 py-3 focus:border-brand-warm-accent outline-none transition-colors text-lg"
-                />
-                <textarea
-                  required rows={3}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Your Message"
-                  className="w-full bg-transparent border-b border-white/30 text-white placeholder-white/50 py-3 focus:border-brand-warm-accent outline-none transition-colors text-lg resize-none"
-                />
-                <MagneticButton as="button">
-                  <button type="submit" className="btn-gold mt-4">
-                    Send Message
-                  </button>
-                </MagneticButton>
-              </form>
-            )}
+            <div className="gold-line mb-8" />
+            <blockquote className="text-3xl md:text-4xl font-display font-light text-white leading-relaxed hero-text-shield">
+              &quot;A <span className="text-brand-gold font-medium">beautiful smile</span> is the universal language of <span className="text-brand-warm-accent font-medium">kindness</span> and <span className="text-accent-italic">confidence</span>.&quot;
+            </blockquote>
+            <p className="mt-8 text-white/80 text-lg hero-text-shield">
+              Your journey to a healthier, brighter smile begins with a simple conversation. Let our experts guide you to optimal dental wellness.
+            </p>
           </motion.div>
 
           {/* Contact Info */}
@@ -118,47 +65,52 @@ export default function ContactPage() {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </div>
-                <span className="text-white/60 text-sm">Phone</span>
+                <span className="text-white font-semibold text-base tracking-wide drop-shadow-md">Phone</span>
               </div>
-              <a href="tel:+919976658340" className="text-2xl font-display font-bold text-brand-gold transition-all duration-300 hover:text-brand-gold-light ml-[52px]">
+              <a href="tel:+919976658340" className="text-2xl font-display font-bold text-brand-gold transition-all duration-300 hover:text-brand-gold-light ml-[52px] drop-shadow-md">
                 +91 99766 58340
               </a>
             </div>
 
             {/* Social Media */}
             <div>
-              <p className="text-white/60 text-sm mb-4">Follow Us</p>
-              <div className="flex flex-col gap-4">
+              <p className="text-white font-semibold text-base tracking-wide mb-5 drop-shadow-md">Connect With Us</p>
+              <div className="flex flex-col gap-5">
+                {/* Facebook */}
                 <a
                   href={clinicInfo.facebook}
                   target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-3 group"
+                  className="flex items-center gap-4 group bg-white/5 hover:bg-white/10 p-3 rounded-2xl border border-white/10 transition-all duration-300 w-full max-w-sm"
                 >
-                  <div className="h-11 w-11 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-brand-gold transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-brand-gold">
+                  <div className="h-14 w-14 rounded-xl bg-[#1877F2] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                     </svg>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-white">Facebook</span>
-                    <span className="text-xs text-white/50">Kingslyn Dental Care</span>
+                  <div className="flex flex-col drop-shadow-md">
+                    <span className="text-lg font-bold text-[#1877F2]">Facebook</span>
+                    <span className="text-sm text-white font-medium">Kingslyn Dental Care</span>
+                    <span className="text-xs text-white/70 mt-0.5">Stay updated with our clinic news</span>
                   </div>
                 </a>
+
+                {/* Instagram */}
                 <a
                   href={clinicInfo.instagram}
                   target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-3 group"
+                  className="flex items-center gap-4 group bg-white/5 hover:bg-white/10 p-3 rounded-2xl border border-white/10 transition-all duration-300 w-full max-w-sm"
                 >
-                  <div className="h-11 w-11 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-brand-gold transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-brand-gold">
+                  <div className="h-14 w-14 rounded-xl bg-gradient-to-tr from-[#FFDC80] via-[#F56040] to-[#C13584] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-white">Instagram</span>
-                    <span className="text-xs text-white/50">@kingstonchellapandian</span>
+                  <div className="flex flex-col drop-shadow-md">
+                    <span className="text-lg font-bold text-[#E1306C]">Instagram</span>
+                    <span className="text-sm text-white font-medium">@kingstonchellapandian</span>
+                    <span className="text-xs text-white/70 mt-0.5">Follow our smile transformations</span>
                   </div>
                 </a>
               </div>
@@ -173,9 +125,9 @@ export default function ContactPage() {
                     <circle cx="12" cy="10" r="3" />
                   </svg>
                 </div>
-                <span className="text-white/60 text-sm">Address</span>
+                <span className="text-white font-semibold text-base tracking-wide drop-shadow-md">Address</span>
               </div>
-              <p className="text-white ml-[52px]">112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India</p>
+              <p className="text-white font-medium ml-[52px] leading-relaxed drop-shadow-md">112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India</p>
             </div>
 
             {/* Working Hours */}
@@ -187,12 +139,12 @@ export default function ContactPage() {
                     <polyline points="12 6 12 12 16 14" />
                   </svg>
                 </div>
-                <span className="text-white/60 text-sm">Working Hours</span>
+                <span className="text-white font-semibold text-base tracking-wide drop-shadow-md">Working Hours</span>
               </div>
-              <p className="text-white ml-[52px]">Mon - Thu: 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM</p>
-              <p className="text-white/60 text-sm mt-1 ml-[52px]">Fri: 10:00 AM - 01:00 PM, 04:00 PM - 06:30 PM</p>
-              <p className="text-white/60 text-sm mt-1 ml-[52px]">Sat: 06:00 PM - 09:00 PM</p>
-              <p className="text-white/60 text-sm mt-1 ml-[52px]">Sun: 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM</p>
+              <p className="text-white font-medium ml-[52px] drop-shadow-md"><span className="font-bold text-brand-gold">Mon - Thu:</span> 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM</p>
+              <p className="text-white font-medium mt-2 ml-[52px] drop-shadow-md"><span className="font-bold text-brand-gold">Fri:</span> 10:00 AM - 01:00 PM, 04:00 PM - 06:30 PM</p>
+              <p className="text-white font-medium mt-2 ml-[52px] drop-shadow-md"><span className="font-bold text-brand-gold">Sat:</span> 06:00 PM - 09:00 PM</p>
+              <p className="text-white font-medium mt-2 ml-[52px] drop-shadow-md"><span className="font-bold text-brand-gold">Sun:</span> 10:00 AM - 01:00 PM, 05:00 PM - 09:00 PM</p>
             </div>
           </motion.div>
         </div>

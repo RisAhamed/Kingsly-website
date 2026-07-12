@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -59,16 +58,11 @@ export default function Navbar() {
         >
           <Link href="/" aria-label="Kingslyn Dental Care Home" className="flex items-center gap-3">
             <motion.span whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="block">
-              <Image
-                src="/images/logo.png"
-                alt="Kingslyn Dental Care"
-                width={152}
-                height={48}
-                priority
-                className={`h-10 w-auto md:h-12 transition-all duration-500 ${
-                  scrolled ? 'opacity-100' : 'brightness-0 invert opacity-90'
-                }`}
-              />
+              <span className={`text-lg md:text-xl font-black tracking-tight transition-all duration-500 ${
+                scrolled ? 'text-brand-light' : 'text-white'
+              }`}>
+                Kingslyn Dental Care
+              </span>
             </motion.span>
           </Link>
 
