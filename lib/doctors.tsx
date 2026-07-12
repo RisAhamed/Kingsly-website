@@ -45,7 +45,7 @@ export const doctors: Doctor[] = [
     ],
     quote: "Excellence in dentistry is not just about treating teeth; it's about restoring confidence and changing lives with compassion and precision.",
     bio: "As the visionary founder and principal surgeon of Kingslyn Dental Care, Dr. C. Kingston has dedicated his life to redefining the standards of modern dentistry. He is a highly experienced and deeply committed dental professional, leading his clinic with a philosophy of uncompromised care and precision. He obtained his Bachelor's in Dental Surgery (BDS) from Balaji Dental College and Hospital, Chennai, graduating in 2007. Driven by a relentless passion for dentistry, he completed his Master's in Dental Surgery (MDS) from Rajas Dental College and Hospital, Tirunelveli, in 2015. Currently, he is pursuing a PhD at SRM University, Chennai, pushing the boundaries of endodontic research. Dr. Kingston's core motivation to establish Kingslyn Dental Care was to offer premium, world-class dental services with an absolute, non-negotiable emphasis on sterilization, ensuring a perfectly safe and hygienic environment. With a remarkable 17 years of experience as a General Dentist and an additional 9 years specializing as an Endodontist, Dr. Kingston has mastered the art and science of dentistry. His elite expertise spans restorative dentistry, complex esthetic makeovers, and painless root canal therapies. Dr. Kingston's true passion lies in architecting perfect smiles and elevating the aesthetic appeal of his patients' teeth, while profoundly improving their overall well-being. Under his leadership, the entire team at Kingslyn Dental Care is inspired to deliver personalized, comprehensive, and compassionate care. Trust your smile to the expert hands of Dr. C. Kingston, where visionary leadership meets exceptional dental care.",
-    filterTags: ["Cosmetic", "General"],
+    filterTags: ["Endodontics", "Cosmetic", "General"],
   },
   {
     id: 2,
@@ -374,6 +374,7 @@ export const clinicInfo = {
 export const facilityImages = [
   { src: "/images/clinicouterlook.png", alt: "Clinic Exterior", caption: "Kingslyn Dental Care - Welcome" },
   { src: "/images/waitingarea.png", alt: "Reception Area", caption: "Modern Reception - Warm Welcome" },
+  { src: "/images/infra.jpeg", alt: "Waiting Area", caption: "Waiting Area", contain: true },
   { src: "/images/operatory1.png", alt: "Operatory Room 1", caption: "State-of-the-Art Operatory" },
   { src: "/images/operatory2.png", alt: "Operatory Room 2", caption: "Advanced Treatment Suite" },
   { src: "/images/dentalchair.png", alt: "Dental Chair", caption: "Comfortable Treatment Chair" },
@@ -383,6 +384,7 @@ export const facilityImages = [
 export const filterCategories = [
   "All",
   "Cosmetic",
+  "Endodontics",
   "Orthodontics",
   "Pediatric",
   "Implants",

@@ -90,10 +90,11 @@ const treatments = [
   },
   {
     title: 'Metal Braces Orthodontics',
-    layout: 'two',
+    layout: 'three',
     images: [
       { src: '/images/treatements/metalbraces pre.jpeg', label: 'Before' },
-      { src: '/images/treatements/metalbraces post.jpeg', label: 'After' },
+      { src: '/images/treatements/metalbraces post.jpeg', label: 'During' },
+      { src: '/images/treatements/metalbraces after.jpeg', label: 'After' },
     ],
   },
   {
