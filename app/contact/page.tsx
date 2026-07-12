@@ -127,7 +127,7 @@ export default function ContactPage() {
                 </div>
                 <span className="text-white font-semibold text-base tracking-wide drop-shadow-md">Address</span>
               </div>
-              <p className="text-white font-medium ml-[52px] leading-relaxed drop-shadow-md">112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tamil Nadu 600045, India</p>
+              <p className="text-white font-medium ml-[52px] leading-relaxed drop-shadow-md">112/56, Gandhi Rd, West Tambaram, Tambaram, Chennai, Tambaram, Tamil Nadu 600045</p>
             </div>
 
             {/* Working Hours */}
@@ -152,7 +152,7 @@ export default function ContactPage() {
         {/* Google Maps */}
         <div className="max-w-6xl mx-auto mt-16 rounded-2xl overflow-hidden border border-white/20">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.930014087931!2d80.1246316!3d12.925283399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525fcbed8b8ed3%3A0x1744fc252dd9590c!2s112%2C%20Gandhi%20Rd%2C%20West%20Tambaram%2C%20Tambaram%2C%20Chennai%2C%20Tamil%20Nadu%20600045%2C%20India!5e0!3m2!1sen!2sin!4v1"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6974125741635!2d80.1152481750767!3d12.930351787381283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f722950c80d%3A0xddded042142a30b0!2sKINGSLYN%20DENTAL%20CARE%20and%20ROOT%20CANAL%20CENTRE!5e0!3m2!1sen!2sin!4v1"
             width="100%"
             height="400"
             style={{ border: 0 }}
