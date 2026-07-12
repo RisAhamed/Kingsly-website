@@ -59,7 +59,7 @@ export default function Navbar() {
         >
           <Link href="/" aria-label="Kingslyn Dental Care Home" className="flex items-center gap-3">
             <motion.span whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="block">
-              <span className={`text-lg md:text-xl font-black tracking-tight transition-all duration-500 ${
+              <span className={`text-xl md:text-2xl font-black tracking-tight transition-all duration-500 ${
                 scrolled ? 'text-brand-light' : 'text-white'
               }`}>
                 Kingslyn Dental Care
