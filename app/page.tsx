@@ -22,16 +22,28 @@ const stats = [
 
 const testimonials = [
   {
-    name: 'Priya S.',
-    quote: 'The clinic felt calm, spotless, and organized. Dr. Kingston explained every step clearly.',
+    name: 'Ellen Durai',
+    quote: 'I had a fantastic experience at Kingslyn dental clinic. Dr. Kingslyn is highly professional, gentle, and thorough. The practice is spotless, and the staff are always so helpful and friendly. I\'m completely happier with my treatment and highly recommend them. The entire team was incredibly warm and put me at ease from the moment I walked in. The dentist explained every step, took their time, and my procedure was entirely painless. Highly recommended! They listened carefully to all my problems, addressed my concerns, and outlined a crystal-clear treatment plan. It is rare to find a clinician who is this thorough, empathetic, and knowledgeable. I feel completely confident in my care. Thank you to the team!',
   },
   {
-    name: 'Rajesh M.',
-    quote: 'My child was nervous before the visit. The pediatric care team made the appointment easy.',
+    name: 'Veni J',
+    quote: 'The doctors were amazing with their experience over there. Clearly explained and treated well. Sneha assisting me from the very first day and was very sweet with all her advices, suggestions and gestures. Thanks to the doctors and staff for the support and guidance.',
   },
   {
-    name: 'Lakshmi V.',
-    quote: 'The orthodontic planning was precise and the team was patient through the full process.',
+    name: 'Hyacinth _chicklets',
+    quote: 'The doctor was very kind and he completed the treatment at very low cost. The other clinic had suggested an implant for my mother in law, but Dr. Kingston did an excellent conservative treatment and preserved the teeth without removing it.',
+  },
+  {
+    name: 'Pavundoss M',
+    quote: 'I had been postponing my dental treatment for quite some time due to a lack of confidence. Dr. Kingston was recommended to me by a relative who had a positive experience with his services. I approached him for a dental implant procedure. From the very beginning, Dr. Kingston clearly explained the entire process, including the estimated costs, the materials used for the implant and crown/denture, and the expected timeline. My treatment spanned over four months... Every visit was well-planned and communicated in advance, allowing me to manage my travel efficiently. Each session was productive, and I felt well taken care of throughout the process. By the end of the fourth month, my dental issues were completely resolved. I regained not only a healthy smile but also a renewed sense of confidence. I highly recommend Dr. Kingston.',
+  },
+  {
+    name: 'Koteeswaran Kannan',
+    quote: 'I\'m absolutely thrilled with the dental treatment my daughter received for her tooth alignment! Dr. Kingston and Dr. Praveen are incredibly professional, kind, and patient. The clinic was clean and welcoming. The treatment process was explained clearly, and the results are amazing. Dr. Praveen\'s warm smile and friendly approach made my child feel at ease. My daughter\'s confidence has soared, and she can\'t stop smiling! Highly recommend this dental care for anyone seeking orthodontic treatment.',
+  },
+  {
+    name: 'Arnold Joseph',
+    quote: 'Really had great experience with Kingston doctor, he is so calm and composed... I have done root canel treatment... Highly recommended doctor for dental related issues..',
   },
 ];
 
@@ -259,6 +271,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Marquee Testimonials Section */}
+      <section className="py-20 md:py-28 overflow-hidden bg-brand-primary">
+        <div className="mx-auto max-w-7xl px-6 mb-12 text-center">
+          <span className="section-kicker">Patient stories</span>
+          <h2 className="section-title">What patients notice <span className="text-accent-italic">first</span> — and remember longest.</h2>
+        </div>
+        
+        <div className="relative w-full overflow-hidden">
+          {/* Gradient masks for smooth edge fading */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-brand-primary to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-brand-primary to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex w-[max-content] animate-marquee gap-6 px-3">
+            {[...testimonials, ...testimonials].map((testimonial, idx) => (
+              <div 
+                key={idx} 
+                className="w-[320px] md:w-[400px] flex-shrink-0 flex flex-col justify-between rounded-[2rem] bg-slate-900 p-8 shadow-[0_15px_40px_rgba(0,0,0,0.15)] border border-slate-700/50 transition-all duration-300 hover:scale-[1.03] hover:-translate-y-2 hover:z-20 cursor-default hover:shadow-[0_25px_50px_rgba(8,145,178,0.15)] hover:border-brand-gold/30 group"
+              >
+                <div>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" className="text-brand-gold/50 mb-6 transition-colors group-hover:text-brand-gold">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                  <p className="text-slate-200 text-sm md:text-base leading-relaxed line-clamp-[8] group-hover:line-clamp-none transition-all duration-300">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
+                </div>
+                <div className="mt-8 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center font-bold text-brand-gold text-lg">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-white tracking-wide">{testimonial.name}</p>
+                    {/* <p className="text-xs text-brand-gold uppercase tracking-widest font-bold">Verified Patient</p> */}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -292,27 +345,6 @@ export default function HomePage() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-brand-light p-6 text-white shadow-[0_34px_110px_rgba(14,95,115,0.18)] md:p-12">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <span className="section-kicker !text-cyan-100/80">Patient words</span>
-              <h2 className="font-display text-[clamp(2.3rem,5vw,4.6rem)] font-black tracking-[-0.02em] leading-[0.98]">
-                What patients notice <span className="text-accent-italic">first</span> — and remember longest.
-              </h2>
-            </div>
-            <div className="grid gap-4">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.name} className="rounded-[1.75rem] border border-white/10 bg-white/8 p-6">
-                  <p className="leading-7 text-cyan-50/82">“{testimonial.quote}”</p>
-                  <p className="mt-4 font-black text-white">{testimonial.name}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

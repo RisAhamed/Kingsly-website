@@ -140,9 +140,20 @@
 
   .surface-card,
   .glass-card {
-    @apply relative overflow-hidden rounded-[2rem] border border-brand-border shadow-[0_28px_90px_rgba(14,95,115,0.10)] transition-all duration-500;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: none;
+    @apply bg-white/85 backdrop-blur-[12px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.08)];
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+  
+  .animate-marquee:hover {
+    animation-play-state: paused;
   }
 
   .surface-card::before,

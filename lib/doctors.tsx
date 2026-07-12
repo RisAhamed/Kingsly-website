@@ -144,119 +144,9 @@ export const services = [
     description: "Treats infection at the root of a tooth to save it and eliminate pain with precision.",
     doctors: ["dr-c-kingston"],
     category: "Endodontics",
-    images: ["/images/RCT (Root Canal Treatment).png", "/images/Root Canal Treatment.png"],
-  },
+    images: ["/images/RCT (Root Canal Treatment).png", "/images/Root Canal Treatment.png"],},
   {
     id: 2,
-    title: "Dental Cleaning",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3C8.5 3 6 5 5 8" />
-        <path d="M5 8c-1 3-.5 6 1 8" />
-        <path d="M6 16c1 2 3 4 6 4" />
-        <path d="M18 8c1 3 .5 6-1 8" />
-        <path d="M19 8C18 5 15.5 3 12 3" />
-        <path d="M12 8v4" />
-        <path d="M12 14v1" />
-        <path d="M9 11l3-3 3 3" />
-        <path d="M7 8l1 1" />
-        <path d="M17 8l-1 1" />
-        <path d="M8.5 19c.5.5 1.5 1 3.5 1s3-.5 3.5-1" />
-      </svg>
-    ),
-    description: "Removes plaque, tartar, and stains to maintain optimal oral hygiene and a bright smile.",
-    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
-    category: "General",
-    images: ["/images/Scaling (Teeth Cleaning  Teeth Whitening).png", "/images/Regular Dental Check Ups.png"],
-  },
-  {
-    id: 3,
-    title: "Tooth Fillings & Sealants",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3c-3 0-5.5 1.5-7 4" />
-        <path d="M5 7c-1 2-1.5 4-1 6" />
-        <path d="M12 3c3 0 5.5 1.5 7 4" />
-        <path d="M19 7c1 2 1.5 4 1 6" />
-        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
-        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
-        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
-        <path d="M12 3v2" />
-        <path d="M10 11.5l1 1 2-2" />
-      </svg>
-    ),
-    description: "Restores decayed or damaged teeth seamlessly using high-quality tooth-colored fillings.",
-    doctors: ["dr-r-snega-latha"],
-    category: "General",
-    images: ["/images/Light Cure Restorations (Tooth Coloured Fillings).png", "/images/Restorations (Tooth Fillings).png"],
-  },
-  {
-    id: 4,
-    title: "Tooth Extraction & Oral Surgery",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3C8.5 3 6 5 5 8" />
-        <path d="M5 8c-1 3-.5 6 1 8" />
-        <path d="M6 16c1 2 3 4 6 4" />
-        <path d="M18 8c1 3 .5 6-1 8" />
-        <path d="M19 8C18 5 15.5 3 12 3" />
-        <path d="M12 8v6" />
-        <path d="M9 10l6 6" />
-        <path d="M15 10l-6 6" />
-        <path d="M9.5 18c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
-      </svg>
-    ),
-    description: "Safely and painlessly removes damaged, impacted, or problematic teeth.",
-    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
-    category: "General",
-    images: ["/images/tooth extraction.webp", "/images/Oral surgery.png", "/images/wisdomtoothextraction.png"],
-  },
-  {
-    id: 5,
-    title: "Braces and Aligners",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3C8 3 5.5 5 4.5 8" />
-        <path d="M4.5 8c-1 3-.5 6 1 8.5" />
-        <path d="M5.5 16.5c1 2 3 3.5 6.5 3.5s5.5-1.5 6.5-3.5" />
-        <path d="M19.5 8c1 3 .5 6-1 8.5" />
-        <path d="M19.5 8C18.5 5 16 3 12 3" />
-        <path d="M7 10c0 0 2-2 5-2s5 2 5 2" />
-        <path d="M8 13c0 0 1.5-1 4-1s4 1 4 1" />
-        <path d="M10 16c0 0 1-.5 2-.5s2 .5 2 .5" />
-        <path d="M6 14c0 0 1 1 3 1" />
-        <path d="M18 14c0 0-1 1-3 1" />
-        <path d="M12 3v2" />
-      </svg>
-    ),
-    description: "Corrects teeth alignment and bite issues with traditional braces or invisible clear aligners.",
-    doctors: ["dr-praveen"],
-    category: "Orthodontics",
-    images: ["/images/Dental Aligners (Invisible Braces  Invisalign).png", "/images/Orthodontic Braces (Ceramic Braces).png"],
-  },
-  {
-    id: 6,
-    title: "Cosmetic Procedures & Bonding",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3c-3 0-5.5 1.5-7 4" />
-        <path d="M5 7c-1 2-1.5 4-1 6" />
-        <path d="M12 3c3 0 5.5 1.5 7 4" />
-        <path d="M19 7c1 2 1.5 4 1 6" />
-        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
-        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
-        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
-        <path d="M12 3v2" />
-        <path d="M10 11.5l1 1 2-2" />
-      </svg>
-    ),
-    description: "Transform your smile perfectly with advanced bonding, veneers, and full cosmetic makeovers.",
-    doctors: ["dr-c-kingston", "dr-janlyn-kingston"],
-    category: "Cosmetic",
-    images: ["/images/Cosmetic Dental Treatment.png", "/images/smile makeover.png", "/images/cosmetic dentistry.png"],
-  },
-  {
-    id: 7,
     title: "Dental Implants",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -277,10 +167,31 @@ export const services = [
     description: "Permanent tooth replacement with state-of-the-art implant technology for a natural look.",
     doctors: ["dr-sethuraman", "dr-aravind-v"],
     category: "Implants",
-    images: ["/images/Dental Implants.png", "/images/dental implants 2.png"],
-  },
+    images: ["/images/Dental Implants.png", "/images/dental implants 2.png"],},
   {
-    id: 8,
+    id: 3,
+    title: "Braces and Aligners",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8 3 5.5 5 4.5 8" />
+        <path d="M4.5 8c-1 3-.5 6 1 8.5" />
+        <path d="M5.5 16.5c1 2 3 3.5 6.5 3.5s5.5-1.5 6.5-3.5" />
+        <path d="M19.5 8c1 3 .5 6-1 8.5" />
+        <path d="M19.5 8C18.5 5 16 3 12 3" />
+        <path d="M7 10c0 0 2-2 5-2s5 2 5 2" />
+        <path d="M8 13c0 0 1.5-1 4-1s4 1 4 1" />
+        <path d="M10 16c0 0 1-.5 2-.5s2 .5 2 .5" />
+        <path d="M6 14c0 0 1 1 3 1" />
+        <path d="M18 14c0 0-1 1-3 1" />
+        <path d="M12 3v2" />
+      </svg>
+    ),
+    description: "Corrects teeth alignment and bite issues with traditional braces or invisible clear aligners.",
+    doctors: ["dr-praveen"],
+    category: "Orthodontics",
+    images: ["/images/Dental Aligners (Invisible Braces  Invisalign).png", "/images/Orthodontic Braces (Ceramic Braces).png"],},
+  {
+    id: 4,
     title: "Dentures & Bridges",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -300,8 +211,89 @@ export const services = [
     description: "Custom-crafted dental prostheses, crowns, bridges, and dentures that fit comfortably.",
     doctors: ["dr-sethuraman", "dr-janlyn-kingston"],
     category: "Implants",
-    images: ["/images/Dentures (Tooth Replacement Fixed Dentures, Removable Dentures, BPS - Full Dentures).png", "/images/Dental Crowns & Bridges.png"],
-  },
+    images: ["/images/Dentures (Tooth Replacement Fixed Dentures, Removable Dentures, BPS - Full Dentures).png", "/images/Dental Crowns & Bridges.png"],},
+  {
+    id: 5,
+    title: "Dental Cleaning",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v4" />
+        <path d="M12 14v1" />
+        <path d="M9 11l3-3 3 3" />
+        <path d="M7 8l1 1" />
+        <path d="M17 8l-1 1" />
+        <path d="M8.5 19c.5.5 1.5 1 3.5 1s3-.5 3.5-1" />
+      </svg>
+    ),
+    description: "Removes plaque, tartar, and stains to maintain optimal oral hygiene and a bright smile.",
+    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/Scaling (Teeth Cleaning  Teeth Whitening).png", "/images/Regular Dental Check Ups.png"],},
+  {
+    id: 6,
+    title: "Tooth Fillings & Sealants",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c-3 0-5.5 1.5-7 4" />
+        <path d="M5 7c-1 2-1.5 4-1 6" />
+        <path d="M12 3c3 0 5.5 1.5 7 4" />
+        <path d="M19 7c1 2 1.5 4 1 6" />
+        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
+        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
+        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
+        <path d="M12 3v2" />
+        <path d="M10 11.5l1 1 2-2" />
+      </svg>
+    ),
+    description: "Restores decayed or damaged teeth seamlessly using high-quality tooth-colored fillings.",
+    doctors: ["dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/Light Cure Restorations (Tooth Coloured Fillings).png", "/images/Restorations (Tooth Fillings).png"],},
+  {
+    id: 7,
+    title: "Tooth Extraction & Oral Surgery",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3C8.5 3 6 5 5 8" />
+        <path d="M5 8c-1 3-.5 6 1 8" />
+        <path d="M6 16c1 2 3 4 6 4" />
+        <path d="M18 8c1 3 .5 6-1 8" />
+        <path d="M19 8C18 5 15.5 3 12 3" />
+        <path d="M12 8v6" />
+        <path d="M9 10l6 6" />
+        <path d="M15 10l-6 6" />
+        <path d="M9.5 18c.5.5 1.5 1 2.5 1s2-.5 2.5-1" />
+      </svg>
+    ),
+    description: "Safely and painlessly removes damaged, impacted, or problematic teeth.",
+    doctors: ["dr-janlyn-kingston", "dr-r-snega-latha"],
+    category: "General",
+    images: ["/images/tooth extraction.webp", "/images/Oral surgery.png", "/images/wisdomtoothextraction.png"],},
+  {
+    id: 8,
+    title: "Cosmetic Procedures & Bonding",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3c-3 0-5.5 1.5-7 4" />
+        <path d="M5 7c-1 2-1.5 4-1 6" />
+        <path d="M12 3c3 0 5.5 1.5 7 4" />
+        <path d="M19 7c1 2 1.5 4 1 6" />
+        <path d="M6 17c1 2 3 3.5 6 3.5s5-1.5 6-3.5" />
+        <path d="M8 11c.5-1 1.5-2 4-2s3.5 1 4 2" />
+        <path d="M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1" />
+        <path d="M12 3v2" />
+        <path d="M10 11.5l1 1 2-2" />
+      </svg>
+    ),
+    description: "Transform your smile perfectly with advanced bonding, veneers, and full cosmetic makeovers.",
+    doctors: ["dr-c-kingston", "dr-janlyn-kingston"],
+    category: "Cosmetic",
+    images: ["/images/Cosmetic Dental Treatment.png", "/images/smile makeover.png", "/images/cosmetic dentistry.png"],},
   {
     id: 9,
     title: "Pediatric Dentistry",
@@ -321,8 +313,7 @@ export const services = [
     description: "Gentle, child-friendly dental care specifically tailored for infants, toddlers, and children.",
     doctors: ["dr-anand-kasi"],
     category: "Pediatric",
-    images: ["/images/Pediatric Dentistry (Child Care Dentistry).png"],
-  },
+    images: ["/images/Pediatric Dentistry (Child Care Dentistry).png"],},
   {
     id: 10,
     title: "Periodontics (Gum Treatment)",
@@ -344,8 +335,7 @@ export const services = [
     description: "Comprehensive gum disease treatment including grafting and advanced laser therapy.",
     doctors: ["dr-aravind-v"],
     category: "Periodontics",
-    images: ["/images/Flap Surgery (Bleeding Gums Treatment, Gum Recession Treatment).png"],
-  },
+    images: ["/images/Flap Surgery (Bleeding Gums Treatment, Gum Recession Treatment).png"],},
   {
     id: 11,
     title: "Mouth Guards & Splints",
@@ -383,12 +373,11 @@ export const clinicInfo = {
 
 export const facilityImages = [
   { src: "/images/clinicouterlook.png", alt: "Clinic Exterior", caption: "Kingslyn Dental Care - Welcome" },
-  { src: "/images/infra.jpeg", alt: "Reception Area", caption: "Modern Reception - Warm Welcome" },
+  { src: "/images/waitingarea.png", alt: "Reception Area", caption: "Modern Reception - Warm Welcome" },
   { src: "/images/operatory1.png", alt: "Operatory Room 1", caption: "State-of-the-Art Operatory" },
   { src: "/images/operatory2.png", alt: "Operatory Room 2", caption: "Advanced Treatment Suite" },
   { src: "/images/dentalchair.png", alt: "Dental Chair", caption: "Comfortable Treatment Chair" },
   { src: "/images/sterilazationroom.png", alt: "Sterilization Room", caption: "Sterilization Room - Safety First" },
-  { src: "/images/waitingarea.png", alt: "Waiting Area", caption: "Relaxing Waiting Lounge" },
 ];
 
 export const filterCategories = [
