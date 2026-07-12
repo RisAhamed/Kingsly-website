@@ -383,7 +383,7 @@ export const clinicInfo = {
 
 export const facilityImages = [
   { src: "/images/clinicouterlook.png", alt: "Clinic Exterior", caption: "Kingslyn Dental Care - Welcome" },
-  { src: "/images/reception.png", alt: "Reception Area", caption: "Modern Reception - Warm Welcome" },
+  { src: "/images/infra.jpeg", alt: "Reception Area", caption: "Modern Reception - Warm Welcome" },
   { src: "/images/operatory1.png", alt: "Operatory Room 1", caption: "State-of-the-Art Operatory" },
   { src: "/images/operatory2.png", alt: "Operatory Room 2", caption: "Advanced Treatment Suite" },
   { src: "/images/dentalchair.png", alt: "Dental Chair", caption: "Comfortable Treatment Chair" },

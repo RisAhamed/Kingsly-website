@@ -102,6 +102,7 @@ export default function AboutPage() {
             alt="Kingslyn Dental Care Logo"
             width={300}
             height={100}
+            priority={true}
             className="w-[200px] md:w-[300px] h-auto object-contain mx-auto opacity-90"
           />
         </motion.div>
