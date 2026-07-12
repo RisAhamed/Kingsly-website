@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 
 export const metadata: Metadata = {
-  title: 'Kingslyn Dental Care | Premium Dental Clinic in Tamil Nadu',
+  title: 'Kingslyn Dental Care | Premium Dental Clinic in West Tambaram',
   description:
     'Expert cosmetic, restorative, pediatric, orthodontic, implant, and preventive dentistry from Kingslyn Dental Care.',
   icons: {

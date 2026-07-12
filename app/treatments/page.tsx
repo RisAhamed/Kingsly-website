@@ -173,7 +173,7 @@ export default function TreatmentsPage() {
                         />
                       </div>
                     )}
-                    {img.label && (
+                    {'label' in img && img.label && (
                       <div className="absolute top-4 left-4 bg-brand-gold/90 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-md">
                         {img.label}
                       </div>
